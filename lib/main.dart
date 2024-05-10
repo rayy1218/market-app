@@ -1,14 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supermarket_management/api/service/authentication_service.dart';
 import 'package:supermarket_management/model/entity/access_right.dart';
 import 'package:supermarket_management/module/auth/ui/login_page.dart';
 import 'package:supermarket_management/module/home/ui/home_page.dart';
 
 void main() async {
-  await dotenv.load();
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider<AuthenticationBloc>(

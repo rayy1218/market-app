@@ -41,14 +41,14 @@ class _CreateLocationPageState extends State<CreateLocationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormBuilderState>();
+    final formKey = GlobalKey<FormBuilderState>();
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Create Stock Location'),
       ),
       body: FormBuilder(
-          key: _formKey,
+          key: formKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 36),
             child: Column(
@@ -89,10 +89,10 @@ class _CreateLocationPageState extends State<CreateLocationPage> {
         ),
         TextButton(
           onPressed: () {
-            _formKey.currentState?.save();
+            formKey.currentState?.save();
 
-            final String name = _formKey.currentState?.value['name'];
-            final int? parent = _formKey.currentState?.value['parent'];
+            final String name = formKey.currentState?.value['name'];
+            final int? parent = formKey.currentState?.value['parent'];
 
             InventoryAction.of(context).createLocation(
                 name: name, parent: parent

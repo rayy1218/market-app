@@ -216,4 +216,21 @@ class InventoryAction {
       }
     });
   }
+
+  Future editItem({id, name, upc, sku, brand, category}) async {
+    return InventoryService.of(token).editItem(
+        id: id, name: name, upc: upc, sku: sku, brand: brand, category: category
+    ).then((response) {
+      switch (response.status) {
+        case ResponseStatus.success:
+          return response.data;
+
+        case ResponseStatus.rejected:
+          return ErrorResponse(message: response.data['message']);
+
+        case ResponseStatus.error:
+          return ErrorResponse(message: 'FAILED_SERVER');
+      }
+    });
+  }
 }

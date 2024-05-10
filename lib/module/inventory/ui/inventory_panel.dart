@@ -62,7 +62,7 @@ class _InventoryPanelState extends State<InventoryPanel> {
           trailing: Text(stock.quantity.toString()),
           onTap: () {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ProductDetailsPage(id: stock.itemMeta!.id))
+                MaterialPageRoute(builder: (context) => ProductDetailsPage(id: stock.itemMeta.id))
             );
           },
         )),
@@ -84,8 +84,14 @@ class _InventoryPanelState extends State<InventoryPanel> {
           trailing: Text(stock.quantity.toString()),
           onTap: () {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ProductDetailsPage(id: stock.itemMeta!.id))
-            );
+                MaterialPageRoute(builder: (context) => ProductDetailsPage(id: stock.itemMeta.id))
+            ).then((_) {
+              setState(() {
+                locations = null;
+              });
+
+              fetch();
+            });
           },
         )),
         ...entity.children!.map((e) => recursively(entity: e, layer: layer + 1)).toList().flattened

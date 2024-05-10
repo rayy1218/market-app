@@ -101,4 +101,16 @@ class InventoryService {
     return await dio.get('/inventory/item/$id')
         .then((response) => GeneralResponse(response));
   }
+
+  Future<GeneralResponse> editItem({id, name, upc, sku, brand, category}) async {
+    return await dio.put('/inventory/item/$id',
+      data: {
+        'name': name,
+        'upc': upc,
+        'sku': sku,
+        'brand': brand,
+        'category': category,
+      }
+    ).then((response) => GeneralResponse(response));
+  }
 }
