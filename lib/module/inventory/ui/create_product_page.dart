@@ -1,7 +1,5 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:supermarket_management/api/error_response.dart';
 import 'package:supermarket_management/model/entity/brand.dart';

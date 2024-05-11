@@ -2,11 +2,16 @@ import 'dart:core';
 import 'package:collection/collection.dart';
 import 'package:supermarket_management/model/entity/company.dart';
 import 'package:supermarket_management/model/entity/group.dart';
+import 'package:supermarket_management/model/entity/supplier.dart';
+import 'package:supermarket_management/model/entity/user.dart';
 import 'package:supermarket_management/model/model.dart';
 import 'package:supermarket_management/model/model_or_id.dart';
 import 'model/entity/address.dart';
 import 'model/entity/item_meta.dart';
+import 'model/entity/item_source.dart';
 import 'model/entity/item_stock_data.dart';
+import 'model/entity/order.dart';
+import 'model/entity/order_item.dart';
 import 'model/entity/stock_location.dart';
 
 class DumbData {
@@ -22,16 +27,16 @@ class DumbData {
   ].mapIndexed((i, e) => e..id = i + 1).toList();
 
   static List<User> employees = [
-    User(group: ModelOrId.data(data: groups[0]), company: ModelOrId.data(data: companies[0]), username: 'Joe', email: 'joe@mail.com'),
-    User(group: ModelOrId.data(data: groups[1]), company: ModelOrId.data(data: companies[0]), username: 'Ray', email: 'ray@mail.com'),
-    User(group: ModelOrId.data(data: groups[2]), company: ModelOrId.data(data: companies[0]), username: 'Brandon', email: 'brandon@mail.com'),
-    User(group: ModelOrId.data(data: groups[2]), company: ModelOrId.data(data: companies[0]), username: 'May', email: 'may@mail.com'),
-    User(group: ModelOrId.data(data: groups[3]), company: ModelOrId.data(data: companies[0]), username: 'Gauss', email: 'gauss@mail.com'),
+    User(group: ModelOrId.data(data: groups[0]), company: ModelOrId.data(data: companies[0]), username: 'Joe', email: 'joe@mail.com', status: 'active', joinedAt: DateTime.now()),
+    User(group: ModelOrId.data(data: groups[1]), company: ModelOrId.data(data: companies[0]), username: 'Ray', email: 'ray@mail.com', status: 'active', joinedAt: DateTime.now()),
+    User(group: ModelOrId.data(data: groups[2]), company: ModelOrId.data(data: companies[0]), username: 'Brandon', email: 'brandon@mail.com', status: 'active', joinedAt: DateTime.now()),
+    User(group: ModelOrId.data(data: groups[2]), company: ModelOrId.data(data: companies[0]), username: 'May', email: 'may@mail.com', status: 'active', joinedAt: DateTime.now()),
+    User(group: ModelOrId.data(data: groups[3]), company: ModelOrId.data(data: companies[0]), username: 'Gauss', email: 'gauss@mail.com', status: 'active', joinedAt: DateTime.now()),
   ].mapIndexed((i, e) => e..id = i + 1).toList();
 
   static List<Supplier> suppliers = [
-    Supplier(address: ModelOrId.data(data: Address(id: 1)), name: 'Ee Ruo Xiah', phoneNumber: '+60 06767-3086', email: 'wee@yahoo.com', company: ModelOrId.data(data: companies[0])),
-    Supplier(address: ModelOrId.data(data: Address(id: 1)), name: 'Muhammet Haji Syuqeri Maswari', phoneNumber: '+60 3523598', email: 'sambanthan.rena@hotmail.com', company: ModelOrId.data(data: companies[0]))
+    Supplier(address: Address(id: 1), name: 'Ee Ruo Xiah', phone: '+60 06767-3086', email: 'wee@yahoo.com'),
+    Supplier(address: Address(id: 1), name: 'Muhammet Haji Syuqeri Maswari', phone: '+60 3523598', email: 'sambanthan.rena@hotmail.com')
   ].mapIndexed((i, e) => e..id = i + 1).toList();
 
   static List<ItemMeta> itemMetas = [
@@ -71,9 +76,9 @@ class DumbData {
   ].mapIndexed((i, e) => e..id = i + 1).toList();
 
   static List<Order> orders = [
-    Order(company: ModelOrId.data(data: companies[0]), supplier: ModelOrId.data(data: suppliers[0]), user: ModelOrId.data(data: employees[0]), status: OrderStatus.created, remark: '', timestamp: DateTime.now()),
-    Order(company: ModelOrId.data(data: companies[0]), supplier: ModelOrId.data(data: suppliers[1]), user: ModelOrId.data(data: employees[0]), status: OrderStatus.completed, remark: '', timestamp: DateTime.now()),
-    Order(company: ModelOrId.data(data: companies[0]), supplier: ModelOrId.data(data: suppliers[0]), user: ModelOrId.data(data: employees[0]), status: OrderStatus.delivering, remark: '', timestamp: DateTime.now()),
+    Order(supplier: ModelOrId.data(data: suppliers[0]), user: ModelOrId.data(data: employees[0]), status: OrderStatus.created, remark: '', timestamp: DateTime.now(), updatedTimestamp: DateTime.now()),
+    Order(supplier: ModelOrId.data(data: suppliers[1]), user: ModelOrId.data(data: employees[0]), status: OrderStatus.completed, remark: '', timestamp: DateTime.now(), updatedTimestamp: DateTime.now()),
+    Order(supplier: ModelOrId.data(data: suppliers[0]), user: ModelOrId.data(data: employees[0]), status: OrderStatus.delivering, remark: '', timestamp: DateTime.now(), updatedTimestamp: DateTime.now()),
   ].mapIndexed((i, e) => e..id = i + 1).toList();
 
   static List<OrderItem> orderItems = [

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 enum Level { debug, info, warning, error, alien }
 
@@ -87,6 +86,7 @@ class MasterService {
             \nonError: ${error.requestOptions.method} request => ${error.requestOptions.baseUrl}${error.requestOptions.path}
             \nonError: ${error.error}, Message: ${error.message}
             \nonError: ${error.response?.data['error_message']}
+            \nonError: ${error.response?.data['message']}
           ''', level: Level.error);
 
 

@@ -19,7 +19,12 @@ class Address extends Model {
       line2 = data['line2'],
       city = data['city'],
       state = data['state'],
-      postcode = data['postcode'],
+      postcode = data['zipcode'],
       country = data['country'],
       super(id: data['id']);
+
+  @override
+  String toString() {
+    return '$line1, $line2, $city, $state $postcode, $country';
+  }
 }

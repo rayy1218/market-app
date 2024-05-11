@@ -113,4 +113,16 @@ class InventoryService {
       }
     ).then((response) => GeneralResponse(response));
   }
+
+  Future<GeneralResponse> stockSplit({itemStockData, quantity, outputLocation, outputItem, outputQuantity}) async {
+    return await dio.post('/inventory/stock-split',
+        data: {
+          'item_stock_data': itemStockData,
+          'quantity': quantity,
+          'output_location': outputLocation,
+          'output_item': outputItem,
+          'output_quantity': outputQuantity,
+        }
+    ).then((response) => GeneralResponse(response));
+  }
 }

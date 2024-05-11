@@ -55,7 +55,7 @@ class _SupplyChainPageState extends State<SupplyChainPage> {
             child: const Icon(Icons.local_shipping),
             onTap: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const CreateOrderPage())
+                  MaterialPageRoute(builder: (context) => CreateOrderPage())
               );
             }
           ),

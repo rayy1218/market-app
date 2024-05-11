@@ -1,6 +1,7 @@
 import 'package:supermarket_management/model/entity/brand.dart';
 import 'package:supermarket_management/model/entity/category.dart';
 import 'package:supermarket_management/model/entity/company.dart';
+import 'package:supermarket_management/model/entity/item_source.dart';
 import 'package:supermarket_management/model/entity/item_stock_data.dart';
 import 'package:supermarket_management/model/model.dart';
 import 'package:supermarket_management/model/model_or_id.dart';
@@ -14,6 +15,7 @@ class ItemMeta extends Model {
   ModelOrId<Category>? category;
   List<ItemStockData>? stocks;
   int? stockNumber;
+  List<ItemSource>? sources;
 
   ItemMeta({
     required this.company, required this.name, required this.stockKeepingUnit,
@@ -32,5 +34,8 @@ class ItemMeta extends Model {
       stocks = data['stocks'] == null
           ? null
           : (data['stocks'] as List).map((item) => ItemStockData.fromMap(item)).toList(),
+      sources = data['sources'] == null
+          ? null
+          : (data['sources'] as List).map((item) => ItemSource.fromMap(item)).toList(),
       super(id: data['id']);
 }

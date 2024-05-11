@@ -233,4 +233,23 @@ class InventoryAction {
       }
     });
   }
+
+  Future stockSplit({itemStockData, quantity, outputLocation, outputItem, outputQuantity}) async {
+    return InventoryService.of(token).stockSplit(
+        itemStockData: itemStockData, quantity: quantity,
+        outputLocation: outputLocation, outputItem: outputItem,
+        outputQuantity: outputQuantity
+    ).then((response) {
+      switch (response.status) {
+        case ResponseStatus.success:
+          return response.data;
+
+        case ResponseStatus.rejected:
+          return ErrorResponse(message: response.data['message']);
+
+        case ResponseStatus.error:
+          return ErrorResponse(message: 'FAILED_SERVER');
+      }
+    });
+  }
 }

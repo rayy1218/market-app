@@ -1,37 +1,14 @@
-import 'package:faker/faker.dart' as faker;
-import 'package:supermarket_management/model/entity/access_right.dart';
+import 'package:supermarket_management/model/entity/item_source.dart';
+import 'package:supermarket_management/model/entity/user.dart';
 import 'package:supermarket_management/model/model_or_id.dart';
-
-import 'entity/address.dart';
-import 'entity/company.dart';
-import 'entity/group.dart';
-import 'entity/item_meta.dart';
+import 'package:supermarket_management/model/entity/company.dart';
+import 'package:supermarket_management/model/entity/item_meta.dart';
 
 class Model {
   Model({this.id, this.uuid});
 
   int? id;
   String? uuid;
-}
-
-class User extends Model {
-  User({
-    super.id,
-    super.uuid,
-    required this.group,
-    required this.company,
-    required this.username,
-    required this.email,
-    this.lastName,
-    this.firstName,
-  });
-
-  ModelOrId<Group> group;
-  ModelOrId<Company> company;
-  String username;
-  String email;
-  String? lastName;
-  String? firstName;
 }
 
 class ShiftRecord extends Model {
@@ -59,42 +36,6 @@ enum ShiftType {
   final String label;
 }
 
-class Supplier extends Model {
-  Supplier({
-    super.id,
-    super.uuid,
-    required this.company,
-    required this.address,
-    required this.name,
-    required this.phoneNumber,
-    required this.email,
-  });
-
-  ModelOrId<Company> company;
-  ModelOrId<Address> address;
-  String name;
-  String phoneNumber;
-  String email;
-}
-
-class ItemSource extends Model {
-  ItemSource({
-    super.id,
-    super.uuid,
-    required this.supplier,
-    required this.itemMeta,
-    required this.unitPrice,
-    required this.minOrderQuantity,
-    required this.estimatedLeadTime,
-  });
-
-  ModelOrId<Supplier> supplier;
-  ModelOrId<ItemMeta> itemMeta;
-  double unitPrice;
-  int minOrderQuantity;
-  int estimatedLeadTime;
-}
-
 class ItemSupplyData extends Model {
   ItemSupplyData({
     super.id,
@@ -117,52 +58,6 @@ enum RestockAction {
   email,
   notify,
   none,
-}
-
-class Order extends Model {
-  Order({
-    super.id,
-    super.uuid,
-    required this.company,
-    required this.supplier,
-    required this.user,
-    required this.status,
-    required this.remark,
-    required this.timestamp,
-  });
-
-  ModelOrId<Company> company;
-  ModelOrId<Supplier> supplier;
-  ModelOrId<User> user;
-  OrderStatus status;
-  String remark;
-  DateTime timestamp;
-}
-
-enum OrderStatus {
-  created(label: 'Created'),
-  canceled(label: 'Canceled'),
-  confirmed(label: 'Confirmed'),
-  delivering(label: 'Delivering'),
-  completed(label: 'Completed');
-
-  const OrderStatus({required this.label});
-
-  final String label;
-}
-
-class OrderItem extends Model {
-  OrderItem({
-    super.id,
-    super.uuid,
-    required this.order,
-    required this.itemSource,
-    required this.quantity,
-  });
-
-  ModelOrId<Order> order;
-  ModelOrId<ItemSource> itemSource;
-  int quantity;
 }
 
 class ItemSaleData extends Model {

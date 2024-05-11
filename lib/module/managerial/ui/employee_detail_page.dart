@@ -104,74 +104,72 @@ class _EmployeeDetailPageState extends State<EmployeeDetailPage> {
       ),
       body: entry != null ? FormBuilder(
         key: formKey,
-        child: Padding(
+        child: ListView(
           padding: const EdgeInsets.all(16.0),
-          child: ListView(
-            children: [
-              const Center(
-                child: CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  radius: 60,
-                  child: Icon(Icons.person, size: 60),
-                ),
+          children: [
+            const Center(
+              child: CircleAvatar(
+                backgroundColor: Colors.grey,
+                radius: 60,
+                child: Icon(Icons.person, size: 60),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 32.0, 16, 8.0),
-                child: TextField(
-                  controller: TextEditingController(text: entry!.username),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Username',
-                  ),
-                  readOnly: true,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 32.0, 16, 8.0),
+              child: TextField(
+                controller: TextEditingController(text: entry!.username),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Username',
                 ),
+                readOnly: true,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16.0, 16, 8.0),
-                child: TextField(
-                  controller: TextEditingController(text: entry!.status),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Status',
-                  ),
-                  readOnly: true,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16.0, 16, 8.0),
+              child: TextField(
+                controller: TextEditingController(text: entry!.status),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Status',
                 ),
+                readOnly: true,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16.0, 16, 8.0),
-                child: TextField(
-                  controller: TextEditingController(text: entry!.email),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email Address',
-                  ),
-                  readOnly: true,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16.0, 16, 8.0),
+              child: TextField(
+                controller: TextEditingController(text: entry!.email),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email Address',
                 ),
+                readOnly: true,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16.0, 16, 8.0),
-                child: TextField(
-                  controller: TextEditingController(text: entry!.group.data?.name),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Group',
-                  ),
-                  readOnly: true,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16.0, 16, 8.0),
+              child: TextField(
+                controller: TextEditingController(text: entry!.group.data?.name),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Group',
                 ),
+                readOnly: true,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16.0, 16, 8.0),
-                child: TextField(
-                  controller: TextEditingController(text: DateFormat("y MMM d HH:MM").format(entry!.joinedAt)),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Joined At',
-                  ),
-                  readOnly: true,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16.0, 16, 8.0),
+              child: TextField(
+                controller: TextEditingController(text: DateFormat("y MMM d HH:MM").format(entry!.joinedAt)),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Joined At',
                 ),
+                readOnly: true,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ) : const Center( child: CircularProgressIndicator()),
     );
