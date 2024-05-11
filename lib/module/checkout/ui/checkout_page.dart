@@ -17,19 +17,19 @@ class _CheckoutPageState extends State<CheckoutPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(padding: const EdgeInsets.all(16)),
+            const Padding(padding: EdgeInsets.all(16)),
             TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Customer'
               ),
             ),
-            Padding(padding: const EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(8)),
             Row(
               children: [
                 Flexible(
                   child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Stock Item Code/Barcode'
                     ),
@@ -41,12 +41,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
             Expanded(
               child: ListView(
                 children: [
-                  Text('Item(s)'),
-                  Padding(padding: const EdgeInsets.all(2)),
-                  Card(child: ListTile(title: Text(DumbData.itemMetas[0].name), subtitle: Text(DumbData.itemMetas[0].universalProductCode), trailing: Text('1'))),
-                  Card(child: ListTile(title: Text(DumbData.itemMetas[1].name), subtitle: Text(DumbData.itemMetas[1].universalProductCode), trailing: Text('1') )),
-                  Card(child: ListTile(title: Text(DumbData.itemMetas[2].name), subtitle: Text(DumbData.itemMetas[2].universalProductCode), trailing: Text('3'))),
-                  Card(child: ListTile(title: Text(DumbData.itemMetas[3].name), subtitle: Text(DumbData.itemMetas[3].universalProductCode), trailing: Text('1'))),
+                  const Text('Item(s)'),
+                  const Padding(padding: EdgeInsets.all(2)),
+                  Card(child: ListTile(title: Text(DumbData.itemMetas[0].name), subtitle: Text(DumbData.itemMetas[0].universalProductCode), trailing: const Text('1'))),
+                  Card(child: ListTile(title: Text(DumbData.itemMetas[1].name), subtitle: Text(DumbData.itemMetas[1].universalProductCode), trailing: const Text('1') )),
+                  Card(child: ListTile(title: Text(DumbData.itemMetas[2].name), subtitle: Text(DumbData.itemMetas[2].universalProductCode), trailing: const Text('3'))),
+                  Card(child: ListTile(title: Text(DumbData.itemMetas[3].name), subtitle: Text(DumbData.itemMetas[3].universalProductCode), trailing: const Text('1'))),
                 ],
               ),
             ),

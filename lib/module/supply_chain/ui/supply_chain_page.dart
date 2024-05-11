@@ -51,16 +51,16 @@ class _SupplyChainPageState extends State<SupplyChainPage> {
         spacing: 8,
         children: [
           SpeedDialChild(
-            label: "Create Order",
+            label: 'Create Order',
             child: const Icon(Icons.local_shipping),
             onTap: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => CreateOrderPage())
+                  MaterialPageRoute(builder: (context) => const CreateOrderPage())
               );
             }
           ),
           SpeedDialChild(
-            label: "Add Supplier",
+            label: 'Add Supplier',
             child: const Icon(Icons.people),
             onTap: () {
               Navigator.of(context).push(

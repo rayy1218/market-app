@@ -17,7 +17,7 @@ class _InventoryReportPageState extends State<InventoryReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inventory Report'),
+        title: const Text('Inventory Report'),
       ),
       body: const Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -114,20 +114,20 @@ class UnderStockCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ListTile(
-              leading: const CircleAvatar(
+            const ListTile(
+              leading: CircleAvatar(
                 backgroundColor: Colors.redAccent,
                 child: Icon(Icons.warning_amber),
               ),
-              title: Text("Products In Low Stock Number"),
+              title: Text('Products In Low Stock Number'),
             ),
-            Divider(indent: 8, endIndent: 8),
+            const Divider(indent: 8, endIndent: 8),
             ListTile(
               leading: const CircleAvatar(
                 backgroundColor: Colors.grey,
@@ -137,8 +137,8 @@ class UnderStockCard extends StatelessWidget {
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.close)),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.close)),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward))
                 ],
               ),
             ),
@@ -151,20 +151,20 @@ class UnderStockCard extends StatelessWidget {
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.close)),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.close)),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward))
                 ],
               ),
             ),
-            Divider(),
-            ListTile(
-              leading: const CircleAvatar(
+            const Divider(),
+            const ListTile(
+              leading: CircleAvatar(
                 backgroundColor: Colors.redAccent,
                 child: Icon(Icons.warning_amber),
               ),
-              title: Text("Products Approaching Low Stock Number"),
+              title: Text('Products Approaching Low Stock Number'),
             ),
-            Divider(indent: 8, endIndent: 8),
+            const Divider(indent: 8, endIndent: 8),
             ListTile(
               leading: const CircleAvatar(
                 backgroundColor: Colors.grey,
@@ -174,11 +174,11 @@ class UnderStockCard extends StatelessWidget {
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.close)),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.close)),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward))
                 ],
               ),
-              subtitle: Text('Understock in 3 days'),
+              subtitle: const Text('Understock in 3 days'),
             ),
           ],
         ),

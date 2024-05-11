@@ -4,9 +4,9 @@ import 'package:supermarket_management/dumb.dart';
 import 'package:supermarket_management/model/model.dart';
 
 class CustomerDetailPage extends StatefulWidget {
-  int customerId;
+  final int customerId;
 
-  CustomerDetailPage({super.key, required this.customerId});
+  const CustomerDetailPage({super.key, required this.customerId});
 
   @override
   State<CustomerDetailPage> createState() => _CustomerDetailPageState();
@@ -43,8 +43,8 @@ class _CustomerDetailPageState extends State<CustomerDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Name: ${customer.name}'),
-                      Text("Email Address: ${customer.email ?? '-'}"),
-                      Text("Phone Number: ${customer.phoneNumber ?? '-'}"),
+                      Text('Email Address: ${customer.email}'),
+                      Text('Phone Number: ${customer.phoneNumber}'),
                     ],
                   ),
                 ],

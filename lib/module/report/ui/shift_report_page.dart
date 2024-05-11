@@ -13,7 +13,7 @@ class _ShiftReportPageState extends State<ShiftReportPage> {
     // Show shift hour of each employee this month
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shift Report'),
+        title: const Text('Shift Report'),
       ),
     );
   }

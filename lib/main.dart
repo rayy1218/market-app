@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermarket_management/api/service/authentication_service.dart';
@@ -54,7 +53,7 @@ class _AuthenticationMiddlewareState extends State<AuthenticationMiddleware> {
         builder: (context, state) {
           switch (state.runtimeType) {
             case LogoutState:
-              return LoginPage();
+              return const LoginPage();
             case LogonState:
               return const HomePage();
             default:

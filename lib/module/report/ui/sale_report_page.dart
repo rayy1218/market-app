@@ -16,9 +16,9 @@ class _SaleReportPageState extends State<SaleReportPage> {
     // Revenue this month
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sales Report'),
+        title: const Text('Sales Report'),
       ),
-      body: Column(
+      body: const Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           RevenueCard(),
@@ -98,6 +98,8 @@ class RevenueCard extends StatelessWidget {
 }
 
 class TotalCheckoutCard extends StatelessWidget {
+  const TotalCheckoutCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -108,16 +110,16 @@ class TotalCheckoutCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ListTile(
+            const ListTile(
               contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-              title: const Text('Total Checkout Count', style: TextStyle(fontSize: 18)),
+              title: Text('Total Checkout Count', style: TextStyle(fontSize: 18)),
               trailing: Text('78', style: TextStyle(fontSize: 18)),
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: [
-                Expanded(child: Text('More Details')),
-                IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward_ios)),
+                const Expanded(child: Text('More Details')),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward_ios)),
               ],
             )
           ],
@@ -143,19 +145,19 @@ class MostProductiveItemCard extends StatelessWidget {
           children: [
             const Text('Most Productive Item', style: TextStyle(fontSize: 18)),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+              contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
               title: Text(DumbData.itemMetas[0].name),
               leading: const CircleAvatar(
                 backgroundColor: Colors.grey,
                 child: Icon(Icons.inventory),
               ),
-              subtitle: Text('RM 399 Produced'),
+              subtitle: const Text('RM 399 Produced'),
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: [
-                Expanded(child: Text('More Details')),
-                IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward_ios)),
+                const Expanded(child: Text('More Details')),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward_ios)),
               ],
             )
           ],
@@ -180,19 +182,19 @@ class HottestItemCard extends StatelessWidget {
           children: [
             const Text('Highest Sales Item', style: TextStyle(fontSize: 18)),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+              contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
               title: Text(DumbData.itemMetas[1].name),
               leading: const CircleAvatar(
                 backgroundColor: Colors.grey,
                 child: Icon(Icons.inventory),
               ),
-              subtitle: Text('38 Sold'),
+              subtitle: const Text('38 Sold'),
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: [
-                Expanded(child: Text('More Details')),
-                IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward_ios)),
+                const Expanded(child: Text('More Details')),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward_ios)),
               ],
             )
           ],

@@ -78,7 +78,7 @@ class _ShiftPageState extends State<ShiftPage> {
             child: ListView(
               children: entries.reversed.map((e) => ListTile(
                 title: Text(e.type.label),
-                subtitle: Text(DateFormat("${DateFormat.YEAR_ABBR_MONTH_DAY} HH:MM").format(e.timestamp))
+                subtitle: Text(DateFormat('${DateFormat.YEAR_ABBR_MONTH_DAY} HH:MM').format(e.timestamp))
               )).toList(),
             )
           )

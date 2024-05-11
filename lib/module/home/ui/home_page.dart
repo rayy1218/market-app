@@ -4,8 +4,7 @@ import 'package:supermarket_management/module/home/ui/dashboard_page.dart';
 import 'package:supermarket_management/module/home/ui/operation_page.dart';
 import 'package:supermarket_management/module/home/ui/profile_page.dart';
 import 'package:supermarket_management/module/home/ui/report_page.dart';
-
-import '../../../main.dart';
+import 'package:supermarket_management/main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

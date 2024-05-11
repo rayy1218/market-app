@@ -14,7 +14,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('Home'),
+        title: const Text('Home'),
         automaticallyImplyLeading: false,
       ),
       body: Padding(
@@ -32,9 +32,9 @@ class _DashboardPageState extends State<DashboardPage> {
                         backgroundColor: Colors.redAccent,
                         child: Icon(Icons.warning_amber),
                       ),
-                      title: const Text("Shift Start Not Recorded Yet"),
+                      title: const Text('Shift Start Not Recorded Yet'),
                       trailing: IconButton(
-                        icon: Icon(Icons.arrow_forward),
+                        icon: const Icon(Icons.arrow_forward),
                         onPressed: () {},
                       ),
                     ),
@@ -48,14 +48,14 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ListTile(
-                      leading: const CircleAvatar(
+                    const ListTile(
+                      leading: CircleAvatar(
                         backgroundColor: Colors.redAccent,
                         child: Icon(Icons.warning_amber),
                       ),
-                      title: Text("Products In Low Stock Number"),
+                      title: Text('Products In Low Stock Number'),
                     ),
-                    Divider(indent: 8, endIndent: 8),
+                    const Divider(indent: 8, endIndent: 8),
                     ListTile(
                       leading: const CircleAvatar(
                         backgroundColor: Colors.grey,
@@ -65,8 +65,8 @@ class _DashboardPageState extends State<DashboardPage> {
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          IconButton(onPressed: () {}, icon: Icon(Icons.close)),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))
+                          IconButton(onPressed: () {}, icon: const Icon(Icons.close)),
+                          IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward))
                         ],
                       ),
                     ),
@@ -79,8 +79,8 @@ class _DashboardPageState extends State<DashboardPage> {
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          IconButton(onPressed: () {}, icon: Icon(Icons.close)),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))
+                          IconButton(onPressed: () {}, icon: const Icon(Icons.close)),
+                          IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward))
                         ],
                       ),
                     ),

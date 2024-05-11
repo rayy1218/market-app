@@ -54,7 +54,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Group'),
+        title: const Text('Create Group'),
       ),
       body: FormBuilder(
           key: _formKey,
@@ -66,7 +66,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
                   child: FormBuilderTextField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Group Name',
                     ),
@@ -122,17 +122,17 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
             ).then((response) {
               if (response == 'FAILED_RECORD_EXISTED') {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("The group with same name has been registered before"))
+                    const SnackBar(content: Text('The group with same name has been registered before'))
                 );
               }
               else if (response == 'FAILED_SERVER') {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Server error"))
+                    const SnackBar(content: Text('Server error'))
                 );
               }
               else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Group created successfully"))
+                    const SnackBar(content: Text('Group created successfully'))
                 );
 
                 Navigator.of(context).pop();

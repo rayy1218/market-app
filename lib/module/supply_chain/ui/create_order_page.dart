@@ -88,7 +88,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
               child: FormBuilderCheckbox(
                 name: 'send_mail',
                 initialValue: false,
-                title: Text('Send Email'),
+                title: const Text('Send Email'),
               ),
             ),
             const Divider(),

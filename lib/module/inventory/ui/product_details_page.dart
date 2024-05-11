@@ -389,7 +389,7 @@ class _ItemSalesPanelState extends State<ItemSalesPanel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Name: ${widget.itemMeta.name}'),
-                    const Text("Selling Price: RM 12"),
+                    const Text('Selling Price: RM 12'),
                   ],
                 ),
               ],
@@ -489,7 +489,7 @@ class _ItemSupplyPanelState extends State<ItemSupplyPanel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Name: ${widget.itemMeta.name}'),
-                    const Text("Purchasing Price: RM 12"),
+                    const Text('Purchasing Price: RM 12'),
                   ],
                 ),
               ],

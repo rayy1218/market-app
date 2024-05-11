@@ -101,7 +101,7 @@ class SupplierProfileTab extends StatelessWidget {
                     leading: CircleAvatar(
                       child: Icon(Icons.person),
                     ),
-                    title: Text("Profile"),
+                    title: Text('Profile'),
                   ),
                   const Divider(indent: 8, endIndent: 8),
                   ListTile(
@@ -130,7 +130,7 @@ class SupplierProfileTab extends StatelessWidget {
                     leading: CircleAvatar(
                       child: Icon(Icons.location_on),
                     ),
-                    title: Text("Address"),
+                    title: Text('Address'),
                   ),
                   const Divider(indent: 8, endIndent: 8),
                   ListTile(

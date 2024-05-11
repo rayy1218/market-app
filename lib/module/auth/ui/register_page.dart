@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:supermarket_management/module/auth/action/authentication.action.dart';
-
-import '../../../main.dart';
 
 class RegisterPage extends StatefulWidget {
 
@@ -47,8 +44,8 @@ class _RegisterPageState extends State<RegisterPage> {
             child: ListView(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 36),
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
                   child: Text('Account Information'),
                 ),
                 Padding(
@@ -93,9 +90,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     name: 'reEnterPassword',
                   ),
                 ),
-                Divider(),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+                const Divider(),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 16.0),
                   child: Text('Profile Information'),
                 ),
                 Padding(
@@ -118,9 +115,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     name: 'lastName',
                   ),
                 ),
-                Divider(),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+                const Divider(),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 16.0),
                   child: Text('Company Information'),
                 ),
                 Padding(

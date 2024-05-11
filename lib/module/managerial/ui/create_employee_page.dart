@@ -117,17 +117,17 @@ class _CreateEmployeePageState extends State<CreateEmployeePage> {
               ).then((response) {
                 if (response == 'FAILED_RECORD_EXISTED') {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("The email has been registered before"))
+                    const SnackBar(content: Text('The email has been registered before'))
                   );
                 }
                 else if (response == 'FAILED_SERVER') {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Server error"))
+                      const SnackBar(content: Text('Server error'))
                   );
                 }
                 else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Employee created successfully"))
+                      const SnackBar(content: Text('Employee created successfully'))
                   );
 
                   Navigator.of(context).pop();

@@ -165,7 +165,7 @@ class _GroupDetailMembersTabState extends State<GroupDetailMembersTab> {
                   .then((response) {
                 if (response == null) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Updated"))
+                      const SnackBar(content: Text('Updated'))
                   );
                 }
                 else {
@@ -298,7 +298,7 @@ class _GroupDetailAccessRightTabState extends State<GroupDetailAccessRightTab> {
                 .then((response) {
                   if (response == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Updated"))
+                        const SnackBar(content: Text('Updated'))
                     );
                   }
                   else {

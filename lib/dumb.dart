@@ -6,13 +6,13 @@ import 'package:supermarket_management/model/entity/supplier.dart';
 import 'package:supermarket_management/model/entity/user.dart';
 import 'package:supermarket_management/model/model.dart';
 import 'package:supermarket_management/model/model_or_id.dart';
-import 'model/entity/address.dart';
-import 'model/entity/item_meta.dart';
-import 'model/entity/item_source.dart';
-import 'model/entity/item_stock_data.dart';
-import 'model/entity/order.dart';
-import 'model/entity/order_item.dart';
-import 'model/entity/stock_location.dart';
+import 'package:supermarket_management/model/entity/address.dart';
+import 'package:supermarket_management/model/entity/item_meta.dart';
+import 'package:supermarket_management/model/entity/item_source.dart';
+import 'package:supermarket_management/model/entity/item_stock_data.dart';
+import 'package:supermarket_management/model/entity/order.dart';
+import 'package:supermarket_management/model/entity/order_item.dart';
+import 'package:supermarket_management/model/entity/stock_location.dart';
 
 class DumbData {
   static List<Company> companies = [

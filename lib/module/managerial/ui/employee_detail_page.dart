@@ -69,7 +69,7 @@ class _EmployeeDetailPageState extends State<EmployeeDetailPage> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response)));
       }
       else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Employee has been deleted")));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Employee has been deleted')));
         Navigator.of(context).pop();
       }
     });
@@ -161,7 +161,7 @@ class _EmployeeDetailPageState extends State<EmployeeDetailPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 16.0, 16, 8.0),
               child: TextField(
-                controller: TextEditingController(text: DateFormat("y MMM d HH:MM").format(entry!.joinedAt)),
+                controller: TextEditingController(text: DateFormat('y MMM d HH:MM').format(entry!.joinedAt)),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Joined At',

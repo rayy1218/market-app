@@ -15,7 +15,7 @@ class _CreateCustomerProfilePageState extends State<CreateCustomerProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Customer Profile'),
+        title: const Text('Create Customer Profile'),
       ),
       body: FormBuilder(
           key: _formKey,
@@ -25,21 +25,21 @@ class _CreateCustomerProfilePageState extends State<CreateCustomerProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Customer Name',
                   ),
                 ),
-                Padding(padding: const EdgeInsets.all(8)),
+                const Padding(padding: EdgeInsets.all(8)),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Customer Email'
                   ),
                 ),
-                Padding(padding: const EdgeInsets.all(8)),
+                const Padding(padding: EdgeInsets.all(8)),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Customer Phone Number'
                   ),

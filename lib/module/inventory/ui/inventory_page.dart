@@ -155,7 +155,7 @@ class _InventoryPanelState extends State<InventoryPanel> {
 
         children: [
           SpeedDialChild(
-              label: "Create Stock Location",
+              label: 'Create Stock Location',
               child: const Icon(Icons.warehouse),
               onTap: () {
                 Navigator.of(context).push(
@@ -170,7 +170,7 @@ class _InventoryPanelState extends State<InventoryPanel> {
               }
           ),
           SpeedDialChild(
-              label: "Stock In",
+              label: 'Stock In',
               child: const Icon(Icons.login),
               onTap: () {
                 Navigator.of(context).push(
@@ -185,7 +185,7 @@ class _InventoryPanelState extends State<InventoryPanel> {
               }
           ),
           SpeedDialChild(
-              label: "Move Stock Item",
+              label: 'Move Stock Item',
               child: const Icon(Icons.move_down),
               onTap: () {
                 Navigator.of(context).push(
@@ -200,7 +200,7 @@ class _InventoryPanelState extends State<InventoryPanel> {
               }
           ),
           SpeedDialChild(
-              label: "Stock Splitting",
+              label: 'Stock Splitting',
               child: const Icon(Icons.call_split),
               onTap: () {
                 Navigator.of(context).push(

@@ -141,7 +141,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                     leading: CircleAvatar(
                       child: Icon(Icons.person),
                     ),
-                    title: Text("Supplier"),
+                    title: Text('Supplier'),
                   ),
                   const Divider(indent: 8, endIndent: 8),
                   ListTile(
@@ -174,12 +174,12 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                     leading: CircleAvatar(
                       child: Icon(Icons.list_alt),
                     ),
-                    title: Text("Order"),
+                    title: Text('Order'),
                   ),
                   const Divider(indent: 8, endIndent: 8),
                   ListTile(
                     title: const Text('Created At'),
-                    subtitle: Text(DateFormat("MMM d, y HH:mm").format(entry!.timestamp)),
+                    subtitle: Text(DateFormat('MMM d, y HH:mm').format(entry!.timestamp)),
                   ),
                   ListTile(
                     title: const Text('Maximum Estimated Lead Time'),
@@ -197,7 +197,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   ),
                   ListTile(
                     title: const Text('Updated At'),
-                    subtitle: Text(DateFormat("MMM d, y HH:mm").format(entry!.updatedTimestamp)),
+                    subtitle: Text(DateFormat('MMM d, y HH:mm').format(entry!.updatedTimestamp)),
                   ),
                 ],
               ),
@@ -213,7 +213,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                     leading: CircleAvatar(
                       child: Icon(Icons.inventory),
                     ),
-                    title: Text("Item"),
+                    title: Text('Item'),
                   ),
                   const Divider(indent: 8, endIndent: 8),
                   ...entry!.orderItems!.map((e) => ListTile(

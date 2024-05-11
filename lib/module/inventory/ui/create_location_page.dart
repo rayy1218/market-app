@@ -45,7 +45,7 @@ class _CreateLocationPageState extends State<CreateLocationPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Stock Location'),
+        title: const Text('Create Stock Location'),
       ),
       body: FormBuilder(
           key: formKey,
@@ -57,7 +57,7 @@ class _CreateLocationPageState extends State<CreateLocationPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
                   child: FormBuilderTextField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Stock Location Name'
                     ),

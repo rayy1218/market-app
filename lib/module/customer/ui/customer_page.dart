@@ -3,7 +3,6 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:supermarket_management/dumb.dart';
 import 'package:supermarket_management/model/model.dart';
 import 'package:supermarket_management/module/customer/ui/create_customer_profile_page.dart';
-import 'package:supermarket_management/module/customer/ui/customer_detail_page.dart';
 
 class CustomerPage extends StatefulWidget {
   const CustomerPage({super.key});
@@ -41,7 +40,7 @@ class _CustomerPageState extends State<CustomerPage> {
         spacing: 8,
         children: [
           SpeedDialChild(
-              label: "Add Customer",
+              label: 'Add Customer',
               child: const Icon(Icons.add_box),
               onTap: () {
                 Navigator.of(context).push(

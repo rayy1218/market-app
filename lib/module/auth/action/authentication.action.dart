@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermarket_management/api/service/authentication_service.dart';
 import 'package:supermarket_management/api/general_response.dart';
-
-import '../../../main.dart';
+import 'package:supermarket_management/main.dart';
 
 class AuthenticationAction {
   static Future login(context, email, password) async {
