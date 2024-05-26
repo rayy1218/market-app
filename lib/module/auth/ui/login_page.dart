@@ -14,6 +14,8 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormBuilderState>();
 
   void onLoginClick(BuildContext context) {
+    formKey.currentState!.save();
+
     final email = formKey.currentState?.fields['email']?.value;
     final password = formKey.currentState?.fields['password']?.value;
 

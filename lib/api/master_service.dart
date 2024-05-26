@@ -105,7 +105,7 @@ class MasterService {
 
     dio.options.baseUrl = kDebugMode
         ? 'http://localhost/api'
-        : 'https://market3-fwm222xm7a-uc.a.run.app/api';
+        : 'https://market.loca.lt/api';
 
     if (token != null) {
       dio.options.headers['Authorization'] = 'Bearer $token';

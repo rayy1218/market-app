@@ -59,22 +59,15 @@ class ManageEmployeePanel extends StatefulWidget {
 }
 
 class _ManageEmployeePanelState extends State<ManageEmployeePanel> {
-  List<User> entries = [];
+  List<User>? entries;
   int page = 0;
-  bool loading = false;
 
   void fetchMore() async {
-    setState(() {
-      loading = true;
-    });
-
     EmployeeAction.of(context).fetchByPage(context: context, page: page).then((response) {
       setState(() {
-        entries.addAll((response.data['data'] as List).map((item) => User.fromMap(item)).toList());
-        loading = false;
+        entries = (response.data['data'] as List).map((item) => User.fromMap(item)).toList();
         page += 1;
       });
-
     });
   }
 
@@ -90,8 +83,8 @@ class _ManageEmployeePanelState extends State<ManageEmployeePanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: entries.map((e) => ListTile(
+      body: entries != null ? ListView(
+        children: entries!.map((e) => ListTile(
           leading: const CircleAvatar(
             backgroundColor: Colors.grey,
             child: Icon(Icons.person),
@@ -109,7 +102,7 @@ class _ManageEmployeePanelState extends State<ManageEmployeePanel> {
             });
           },
         )).toList(),
-      ),
+      ) : const Center(child: CircularProgressIndicator()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
@@ -135,19 +128,13 @@ class ManageGroupPanel extends StatefulWidget {
 }
 
 class _ManageGroupPanelState extends State<ManageGroupPanel> {
-  List<Group> entries = [];
+  List<Group>? entries;
   int page = 0;
-  bool loading = false;
 
   void fetchMore() async {
-    setState(() {
-      loading = true;
-    });
-
     GroupAction.of(context).fetchByPage().then((response) {
       setState(() {
-        entries.addAll((response['data'] as List).map((item) => Group.fromMap(item)).toList());
-        loading = false;
+        entries = (response['data'] as List).map((item) => Group.fromMap(item)).toList();
         page += 1;
       });
     });
@@ -165,8 +152,8 @@ class _ManageGroupPanelState extends State<ManageGroupPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: entries.map((e) => ListTile(
+      body: entries != null ? ListView(
+        children: entries!.map((e) => ListTile(
           leading: const CircleAvatar(
             backgroundColor: Colors.grey,
             child: Icon(Icons.person),
@@ -183,7 +170,7 @@ class _ManageGroupPanelState extends State<ManageGroupPanel> {
             });
           },
         )).toList(),
-      ),
+      ) : const Center(child: CircularProgressIndicator()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(

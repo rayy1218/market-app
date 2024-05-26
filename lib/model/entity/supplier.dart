@@ -10,6 +10,8 @@ class Supplier extends Model {
   String email;
   List<ItemSource>? sources;
   List<Order>? orders;
+  int? orderNumber;
+  double? orderCapital;
 
   Supplier({
     required this.address, required this.name, required this.phone,
@@ -23,5 +25,7 @@ class Supplier extends Model {
       email = data['email'],
       orders = data['orders'] == null ? null : (data['orders'] as List).map((e) => Order.fromMap(e)).toList(),
       sources = data['sources'] == null ? null : (data['sources'] as List).map((e) => ItemSource.fromMap(e)).toList(),
+      orderCapital = (data['capital'] as int).toDouble(),
+      orderNumber = data['number'],
       super(id: data['id']);
 }

@@ -146,9 +146,9 @@ class _InventoryPanelState extends State<InventoryPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: locations != null ? locations!.map((e) => recursively(entity: e)).flattened.toList() : [],
-      ),
+      body: locations != null ? ListView(
+        children: locations!.map((e) => recursively(entity: e)).flattened.toList(),
+      ) : const Center(child: CircularProgressIndicator()),
       floatingActionButton: SpeedDial(
         icon: Icons.add,
         spacing: 8,
@@ -280,7 +280,7 @@ class _ItemPanelState extends State<ItemPanel> {
             },
           );
         }).toList(),
-      ) : Container(),
+      ) : const Center(child: CircularProgressIndicator()),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {

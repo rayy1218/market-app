@@ -22,114 +22,112 @@ class _OperationPageState extends State<OperationPage> {
         title: const Text('Operations'),
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
+      body: GridView.count(
         padding: const EdgeInsets.all(16.0),
-        child: GridView.count(
-          mainAxisSpacing: 4,
-          crossAxisSpacing: 4,
-          crossAxisCount: 2,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const ManagerialPage())
-                );
-              },
-              child: const Card(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.people, size: 80),
-                    Text('Managerial'),
-                  ],
-                ),
+        mainAxisSpacing: 4,
+        crossAxisSpacing: 4,
+        crossAxisCount: 2,
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const ManagerialPage())
+              );
+            },
+            child: const Card(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.people, size: 80),
+                  Text('Managerial'),
+                ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const ShiftPage())
-                );
-              },
-              child: const Card(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      child: Icon(Icons.calendar_today, size: 80),
-                    ),
-                    Text('Shift'),
-                  ],
-                ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const ShiftPage())
+              );
+            },
+            child: const Card(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+                    child: Icon(Icons.calendar_today, size: 80),
+                  ),
+                  Text('Shift'),
+                ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const SupplyChainPage())
-                );
-              },
-              child: const Card(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.local_shipping, size: 80),
-                    Text('Supply Chain'),
-                  ],
-                ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const SupplyChainPage())
+              );
+            },
+            child: const Card(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.local_shipping, size: 80),
+                  Text('Supply Chain'),
+                ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const InventoryPage())
-                );
-              },
-              child: const Card(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.inventory, size: 80),
-                    Text('Inventory'),
-                  ],
-                ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const InventoryPage())
+              );
+            },
+            child: const Card(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.inventory, size: 80),
+                  Text('Inventory'),
+                ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const CustomerPage())
-                );
-              },
-              child: const Card(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.loyalty, size: 80),
-                    Text('Customer'),
-                  ],
-                ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const CustomerPage())
+              );
+            },
+            child: const Card(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.loyalty, size: 80),
+                  Text('Customer'),
+                ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const CheckoutPage())
-                );
-              },
-              child: const Card(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.shopping_cart, size: 80),
-                    Text('Checkout'),
-                  ],
-                ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const CheckoutPage())
+              );
+            },
+            child: const Card(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.shopping_cart, size: 80),
+                  Text('Checkout'),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

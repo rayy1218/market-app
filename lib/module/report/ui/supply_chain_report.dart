@@ -1,5 +1,9 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:supermarket_management/dumb.dart';
+import 'package:intl/intl.dart';
+import 'package:supermarket_management/api/error_response.dart';
+import 'package:supermarket_management/model/entity/supplier.dart';
+import 'package:supermarket_management/module/report/action/report_action.dart';
 
 class SupplyChainReport extends StatefulWidget {
   const SupplyChainReport({super.key});
@@ -9,6 +13,39 @@ class SupplyChainReport extends StatefulWidget {
 }
 
 class _SupplyChainReportState extends State<SupplyChainReport> {
+  double? cost;
+  int? createdCount;
+  int? receivedCount;
+  List<Supplier>? supplier;
+
+  void fetch() async {
+    ReportAction.of(context).fetchOrderSummary().then((response) {
+      if (response is ErrorResponse) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(response.message))
+        );
+
+        return;
+      }
+
+      setState(() {
+        cost = (response['data']['cost'] as int).toDouble();
+        createdCount = response['data']['totalCreated'];
+        receivedCount = response['data']['totalCompleted'];
+        supplier = (response['data']['supplier'] as List).map((item) => Supplier.fromMap(item)).toList();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetch();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // Order This Month
@@ -17,32 +54,44 @@ class _SupplyChainReportState extends State<SupplyChainReport> {
       appBar: AppBar(
         title: const Text('Supply Chain Report'),
       ),
-      body: const Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: supplier != null ? ListView(
         children: [
-          SupplyOverviewCard(),
-          TopOrderSupplierCard(),
+          SupplyOverviewCard(
+              cost: cost!,
+              createdCount: createdCount!,
+              receivedCount: receivedCount!
+          ),
+          TopOrderSupplierCard(supplier: supplier!),
         ],
-      ),
+      ) : const Center(child: CircularProgressIndicator()),
     );
   }
 }
 
 class SupplyOverviewCard extends StatelessWidget {
-  const SupplyOverviewCard({super.key});
+  final double cost;
+  final int createdCount;
+  final int receivedCount;
+
+  const SupplyOverviewCard({
+    super.key,
+    required this.cost,
+    required this.createdCount,
+    required this.receivedCount
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
-      margin: EdgeInsets.all(8),
+    return Card(
+      margin: const EdgeInsets.all(8),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('February 2024', style: TextStyle(fontSize: 18)),
-            Divider(),
+            Text(DateFormat('MMM y').format(DateTime.now()), style: TextStyle(fontSize: 18)),
+            const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -51,8 +100,8 @@ class SupplyOverviewCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('RM 370.00', style: TextStyle(color: Colors.greenAccent, fontSize: 18)),
-                      Text('Restocking Cost'),
+                      Text('RM ${cost.toStringAsFixed(2).toString()}', style: const TextStyle(color: Colors.greenAccent, fontSize: 18)),
+                      const Text('Restocking Cost'),
                     ],
                   ),
                 ),
@@ -60,8 +109,8 @@ class SupplyOverviewCard extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('7', style: TextStyle(color: Colors.blueAccent, fontSize: 18)),
-                      Text('Order Created'),
+                      Text(createdCount.toString(), style: const TextStyle(color: Colors.blueAccent, fontSize: 18)),
+                      const Text('Order Created'),
                     ],
                   ),
                 ),
@@ -70,8 +119,8 @@ class SupplyOverviewCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text('6', style: TextStyle(color: Colors.redAccent, fontSize: 18)),
-                      Text('Order Received'),
+                      Text(receivedCount.toString(), style: const TextStyle(color: Colors.redAccent, fontSize: 18)),
+                      const Text('Order Received'),
                     ],
                   ),
                 ),
@@ -85,7 +134,9 @@ class SupplyOverviewCard extends StatelessWidget {
 }
 
 class TopOrderSupplierCard extends StatefulWidget {
-  const TopOrderSupplierCard({super.key});
+  final List<Supplier> supplier;
+
+  const TopOrderSupplierCard({super.key, required this.supplier});
 
   @override
   State<TopOrderSupplierCard> createState() => _TopOrderSupplierCardState();
@@ -118,25 +169,19 @@ class _TopOrderSupplierCardState extends State<TopOrderSupplierCard> {
               ],
             ),
             const Divider(),
-            ListTile(
+            ...widget.supplier.mapIndexed((index, e) => ListTile(
               contentPadding: const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
-              leading: const Text('1', style: TextStyle(fontSize: 14)),
-              title: Text(DumbData.suppliers[0].name),
-              trailing: Text(useValue ? 'RM 300.00' : '5 Orders'),
-            ),
-            ListTile(
-              contentPadding: const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
-              leading: const Text('2', style: TextStyle(fontSize: 14)),
-              title: Text(DumbData.suppliers[1].name),
-              trailing: Text(useValue ? 'RM 70.00' : '3 Orders'),
-            ),
-            const Divider(),
-            Row(
-              children: [
-                const Expanded(child: Text('More Details')),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward_ios)),
-              ],
-            )
+              leading: Text((index + 1).toString(), style: TextStyle(fontSize: 14)),
+              title: Text(e.name),
+              trailing: Text(useValue ? 'RM ${e.orderCapital!.toStringAsFixed(2)}' : '${e.orderNumber} Orders'),
+            )).toList(),
+            // const Divider(),
+            // Row(
+            //   children: [
+            //     const Expanded(child: Text('More Details')),
+            //     IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward_ios)),
+            //   ],
+            // )
           ],
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:supermarket_management/dumb.dart';
 
 class SaleReportPage extends StatefulWidget {
   const SaleReportPage({super.key});
@@ -18,8 +17,7 @@ class _SaleReportPageState extends State<SaleReportPage> {
       appBar: AppBar(
         title: const Text('Sales Report'),
       ),
-      body: const Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: ListView(
         children: [
           RevenueCard(),
           TotalCheckoutCard(),
@@ -146,7 +144,7 @@ class MostProductiveItemCard extends StatelessWidget {
             const Text('Most Productive Item', style: TextStyle(fontSize: 18)),
             ListTile(
               contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-              title: Text(DumbData.itemMetas[0].name),
+              title: Text('DumbData.itemMetas[0].name'),
               leading: const CircleAvatar(
                 backgroundColor: Colors.grey,
                 child: Icon(Icons.inventory),
@@ -183,7 +181,7 @@ class HottestItemCard extends StatelessWidget {
             const Text('Highest Sales Item', style: TextStyle(fontSize: 18)),
             ListTile(
               contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-              title: Text(DumbData.itemMetas[1].name),
+              title: Text('DumbData.itemMetas[1].name'),
               leading: const CircleAvatar(
                 backgroundColor: Colors.grey,
                 child: Icon(Icons.inventory),

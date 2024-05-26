@@ -4,7 +4,9 @@ import 'package:supermarket_management/api/error_response.dart';
 import 'package:supermarket_management/model/entity/brand.dart';
 import 'package:supermarket_management/model/entity/category.dart';
 import 'package:supermarket_management/model/entity/item_meta.dart';
+import 'package:supermarket_management/model/entity/item_source.dart';
 import 'package:supermarket_management/module/inventory/action/inventory.action.dart';
+import 'package:supermarket_management/module/inventory/ui/create_supply_page.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final int id;
@@ -469,6 +471,36 @@ class ItemSupplyPanel extends StatefulWidget {
 }
 
 class _ItemSupplyPanelState extends State<ItemSupplyPanel> {
+  final formKey = GlobalKey<FormBuilderState>();
+
+  void onSourceClick(ItemSource source) async {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Delete'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No', style: TextStyle(color: Colors.redAccent)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () {
+                Navigator.of(context)..pop()..push(
+                  MaterialPageRoute(builder: (context) => CreateSupplyPage(itemMeta: widget.itemMeta, itemSource: source))
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -498,12 +530,32 @@ class _ItemSupplyPanelState extends State<ItemSupplyPanel> {
         ),
         const Divider(indent: 8, endIndent: 8),
         Expanded(
-          child: ListView(
-            children: widget.itemMeta.sources!.map((e) => ListTile(
-              title: Text(e.supplier.data!.name),
-              subtitle: Text('\$${e.unitPrice} per unit, ${e.minOrderQuantity} minimum'),
-              trailing: Text('${e.estimatedLeadTime} day(s)'),
-            )).toList(),
+          child: FormBuilder(
+            key: formKey,
+            child: ListView(
+              children: widget.itemMeta.sources!.map((e) {
+                final isSelected = widget.itemMeta.supply != null && widget.itemMeta.supply!.data!.itemSource.id == e.id;
+
+                return ListTile(
+                  leading: Container(
+                    padding: const EdgeInsets.all(1.0),
+                    child: isSelected ? const Icon(
+                      Icons.radio_button_checked,
+                      size: 18.0,
+                      color: Colors.blue,
+                    ) : const Icon(
+                      Icons.radio_button_unchecked,
+                      size: 18.0,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  title: Text(e.supplier.data!.name),
+                  subtitle: Text('\$${e.unitPrice} per unit, ${e.minOrderQuantity} minimum'),
+                  trailing: Text('${e.estimatedLeadTime} day(s)'),
+                  onTap: () => onSourceClick(e),
+                );
+              }).toList(),
+            ),
           ),
         )
       ],

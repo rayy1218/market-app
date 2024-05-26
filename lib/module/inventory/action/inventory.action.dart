@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermarket_management/api/error_response.dart';
 import 'package:supermarket_management/api/general_response.dart';
 import 'package:supermarket_management/api/service/inventory_service.dart';
+import 'package:supermarket_management/api/service/supply_service.dart';
 import 'package:supermarket_management/main.dart';
 import 'package:supermarket_management/module/auth/ui/login_page.dart';
 
@@ -239,6 +240,27 @@ class InventoryAction {
         itemStockData: itemStockData, quantity: quantity,
         outputLocation: outputLocation, outputItem: outputItem,
         outputQuantity: outputQuantity
+    ).then((response) {
+      switch (response.status) {
+        case ResponseStatus.success:
+          return response.data;
+
+        case ResponseStatus.rejected:
+          return ErrorResponse(message: response.data['message']);
+
+        case ResponseStatus.error:
+          return ErrorResponse(message: 'FAILED_SERVER');
+      }
+    });
+  }
+
+  Future setSupply({id, sourceId, onLowStockAction, defaultRestockQuantity, restockPoint}) {
+    return SupplyService.of(token).setSupply(
+      id: id,
+      sourceId: sourceId,
+      onLowStockAction: onLowStockAction,
+      defaultRestockQuantity: defaultRestockQuantity,
+      restockPoint: restockPoint,
     ).then((response) {
       switch (response.status) {
         case ResponseStatus.success:

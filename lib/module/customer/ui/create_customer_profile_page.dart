@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:supermarket_management/api/error_response.dart';
+import 'package:supermarket_management/module/customer/action/customer.action.dart';
 
 class CreateCustomerProfilePage extends StatefulWidget {
   const CreateCustomerProfilePage({super.key});
@@ -24,25 +26,28 @@ class _CreateCustomerProfilePageState extends State<CreateCustomerProfilePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextFormField(
+                FormBuilderTextField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Customer Name',
                   ),
+                  name: 'name',
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
-                TextFormField(
+                FormBuilderTextField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Customer Email'
                   ),
+                  name: 'email',
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
-                TextFormField(
+                FormBuilderTextField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Customer Phone Number'
                   ),
+                  name: 'phone',
                 ),
               ],
             ),
@@ -55,7 +60,34 @@ class _CreateCustomerProfilePageState extends State<CreateCustomerProfilePage> {
             Navigator.of(context).pop();
           },
         ),
-        TextButton(onPressed: () {}, child: const Text('Create')),
+        TextButton(
+          onPressed: () {
+            _formKey.currentState?.save();
+
+            final String name = _formKey.currentState?.value['name'];
+            final String phone = _formKey.currentState?.value['phone'];
+            final String email = _formKey.currentState?.value['email'];
+
+            CustomerAction.of(context).createCustomer(
+                name: name, phone: phone, email: email
+            ).then((response) {
+              if (response is ErrorResponse) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(response.message))
+                );
+
+                return;
+              }
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Supply Created Successfully'))
+              );
+
+              Navigator.of(context).pop();
+            });
+          },
+          child: const Text('Create')
+        ),
       ],
     );
   }

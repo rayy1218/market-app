@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:supermarket_management/dumb.dart';
+import 'package:supermarket_management/api/error_response.dart';
+import 'package:supermarket_management/model/entity/item_meta.dart';
+import 'package:supermarket_management/module/home/action/home_action.dart';
+import 'package:supermarket_management/module/inventory/ui/product_details_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -9,6 +12,48 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  String? currentShiftStatus;
+  List<ItemMeta>? underStockItems;
+
+  void fetch() async {
+    HomeAction.of(context).fetchShift().then((response) {
+      if (response is ErrorResponse) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(response.message))
+        );
+
+        return;
+      }
+
+      setState(() {
+        currentShiftStatus = response['data'];
+      });
+    });
+
+    HomeAction.of(context).fetchUnderStock().then((response) {
+      if (response is ErrorResponse) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(response.message))
+        );
+
+        return;
+      }
+
+      setState(() {
+        underStockItems = (response['data'] as List).map((e) => ItemMeta.fromMap(e)).toList();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetch();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +66,7 @@ class _DashboardPageState extends State<DashboardPage> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            currentShiftStatus != null && currentShiftStatus == 'not record' ?
             Card(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -41,7 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ],
                 ),
               ),
-            ),
+            ) : Container(),
             Card(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -56,34 +102,26 @@ class _DashboardPageState extends State<DashboardPage> {
                       title: Text('Products In Low Stock Number'),
                     ),
                     const Divider(indent: 8, endIndent: 8),
-                    ListTile(
+                    ...underStockItems != null ? underStockItems!.map((e) => ListTile(
                       leading: const CircleAvatar(
                         backgroundColor: Colors.grey,
                         child: Icon(Icons.inventory),
                       ),
-                      title: Text(DumbData.itemMetas[2].name),
+                      title: Text(e.name),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          IconButton(onPressed: () {}, icon: const Icon(Icons.close)),
-                          IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward))
+                          IconButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) => ProductDetailsPage(id: e.id!))
+                              );
+                            },
+                            icon: const Icon(Icons.arrow_forward)
+                          )
                         ],
                       ),
-                    ),
-                    ListTile(
-                      leading: const CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        child: Icon(Icons.inventory),
-                      ),
-                      title: Text(DumbData.itemMetas[3].name),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(onPressed: () {}, icon: const Icon(Icons.close)),
-                          IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward))
-                        ],
-                      ),
-                    ),
+                    )).toList() : []
                   ],
                 ),
               ),

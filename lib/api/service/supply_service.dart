@@ -110,4 +110,17 @@ class SupplyService {
       }
     ).then((response) => GeneralResponse(response));
   }
+
+  Future<GeneralResponse> setSupply({
+    id, sourceId, onLowStockAction, defaultRestockQuantity, restockPoint
+  }) async {
+    return await dio.post('/supply/item/$id',
+      data: {
+        'item_source_id': sourceId,
+        'on_low_stock_action': onLowStockAction,
+        'default_restock_quantity': defaultRestockQuantity,
+        'restock_point': restockPoint,
+      }
+    ).then((response) => GeneralResponse(response));
+  }
 }

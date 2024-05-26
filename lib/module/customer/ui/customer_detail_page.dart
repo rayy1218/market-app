@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:supermarket_management/dumb.dart';
-import 'package:supermarket_management/model/model.dart';
+import 'package:supermarket_management/api/error_response.dart';
+import 'package:supermarket_management/model/entity/customer.dart';
+import 'package:supermarket_management/module/customer/action/customer.action.dart';
 
 class CustomerDetailPage extends StatefulWidget {
   final int customerId;
@@ -13,60 +13,73 @@ class CustomerDetailPage extends StatefulWidget {
 }
 
 class _CustomerDetailPageState extends State<CustomerDetailPage> {
-  late Customer customer;
-  late List activities;
+  Customer? customer;
+
+  void fetch() async {
+    CustomerAction.of(context).fetchCustomer(id: widget.customerId).then((response) {
+      if (response is ErrorResponse) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(response.message))
+        );
+
+        return;
+      }
+
+      setState(() {
+        customer = Customer.fromMap(response['data']);
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetch();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    customer = DumbData.customers[widget.customerId];
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Detail'),
+        title: const Text('Customer Detail'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: customer != null ? ListView(
+        padding: const EdgeInsets.all(16),
         children: [
-          Container(
-            margin: const EdgeInsets.all(8),
+          Card(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  const CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    child: Icon(Icons.inventory),
+                  const ListTile(
+                    leading: CircleAvatar(
+                      child: Icon(Icons.person),
+                    ),
+                    title: Text('Profile'),
                   ),
-                  Container(width: 24),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Name: ${customer.name}'),
-                      Text('Email Address: ${customer.email}'),
-                      Text('Phone Number: ${customer.phoneNumber}'),
-                    ],
+                  const Divider(indent: 8, endIndent: 8),
+                  ListTile(
+                    title: const Text('Name'),
+                    subtitle: Text(customer!.name),
+                  ),
+                  ListTile(
+                    title: const Text('Phone Number'),
+                    subtitle: Text(customer!.phoneNumber),
+                  ),
+                  ListTile(
+                    title: const Text('Email Address'),
+                    subtitle: Text(customer!.email),
                   ),
                 ],
               ),
             ),
           ),
-          const Divider(indent: 8, endIndent: 8),
-          Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ListView(
-                  children: activities.map((e) => Card(
-                    child: ListTile(
-                      title: Text(e.type.label),
-                      subtitle: Text(DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(e.timestamp)),
-                    ),
-                  )).toList(),
-                ),
-              )
-          ),
         ],
-      ),
+      ) : const Center(child: CircularProgressIndicator()),
     );
   }
 }
