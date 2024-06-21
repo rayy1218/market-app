@@ -223,8 +223,8 @@ class SupplierOrderTab extends StatelessWidget {
     return Scaffold(
       body: supplier.orders!.isNotEmpty ? ListView(
         children:  supplier.orders!.map((e) => ListTile(
-          title: Text(DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(e.timestamp)),
-          subtitle: Text(e.status.label),
+          title: Text(e.referenceCode),
+          subtitle: Text('${DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(e.timestamp)} - ${e.status.label}'),
         )).toList(),
       ) : const Center(child: Text('Empty')),
       floatingActionButton: FloatingActionButton(

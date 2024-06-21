@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermarket_management/module/home/ui/dashboard_page.dart';
 import 'package:supermarket_management/module/home/ui/operation_page.dart';
-import 'package:supermarket_management/module/home/ui/profile_page.dart';
+import 'package:supermarket_management/module/home/ui/settings_page.dart';
 import 'package:supermarket_management/module/home/ui/report_page.dart';
 import 'package:supermarket_management/main.dart';
 
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
               const DashboardPage(),
               const OperationPage(),
               const ReportPage(),
-              const ProfilePage(),
+              const SettingPage(),
             ][currentPageIndex]
         );
       },

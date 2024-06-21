@@ -18,7 +18,7 @@ class _SaleReportPageState extends State<SaleReportPage> {
         title: const Text('Sales Report'),
       ),
       body: ListView(
-        children: [
+        children: const [
           RevenueCard(),
           TotalCheckoutCard(),
           Row(
@@ -142,14 +142,14 @@ class MostProductiveItemCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Most Productive Item', style: TextStyle(fontSize: 18)),
-            ListTile(
-              contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+            const ListTile(
+              contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
               title: Text('DumbData.itemMetas[0].name'),
-              leading: const CircleAvatar(
+              leading: CircleAvatar(
                 backgroundColor: Colors.grey,
                 child: Icon(Icons.inventory),
               ),
-              subtitle: const Text('RM 399 Produced'),
+              subtitle: Text('RM 399 Produced'),
             ),
             const Divider(),
             Row(
@@ -179,14 +179,14 @@ class HottestItemCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Highest Sales Item', style: TextStyle(fontSize: 18)),
-            ListTile(
-              contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+            const ListTile(
+              contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
               title: Text('DumbData.itemMetas[1].name'),
-              leading: const CircleAvatar(
+              leading: CircleAvatar(
                 backgroundColor: Colors.grey,
                 child: Icon(Icons.inventory),
               ),
-              subtitle: const Text('38 Sold'),
+              subtitle: Text('38 Sold'),
             ),
             const Divider(),
             Row(

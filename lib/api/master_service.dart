@@ -75,6 +75,7 @@ class MasterService {
         },
         onResponse: (Response response, ResponseInterceptorHandler handler) {
           logDebug('''
+            \nonResponse: ${response.requestOptions.method} request => ${response.requestOptions.baseUrl}${response.requestOptions.path}
             \nonResponse: StatusCode: ${response.statusCode}, Data: ${_prettyJsonEncode(response.data)}
             \n.........................................................................
           ''', level: Level.debug);
@@ -87,6 +88,7 @@ class MasterService {
             \nonError: ${error.error}, Message: ${error.message}
             \nonError: ${error.response?.data['error_message']}
             \nonError: ${error.response?.data['message']}
+            \nData: ${_prettyJsonEncode(error.response?.data)}
           ''', level: Level.error);
 
 

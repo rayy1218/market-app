@@ -90,7 +90,7 @@ class SupplyOverviewCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(DateFormat('MMM y').format(DateTime.now()), style: TextStyle(fontSize: 18)),
+            Text(DateFormat('MMM y').format(DateTime.now()), style: const TextStyle(fontSize: 18)),
             const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -171,7 +171,7 @@ class _TopOrderSupplierCardState extends State<TopOrderSupplierCard> {
             const Divider(),
             ...widget.supplier.mapIndexed((index, e) => ListTile(
               contentPadding: const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
-              leading: Text((index + 1).toString(), style: TextStyle(fontSize: 14)),
+              leading: Text((index + 1).toString(), style: const TextStyle(fontSize: 14)),
               title: Text(e.name),
               trailing: Text(useValue ? 'RM ${e.orderCapital!.toStringAsFixed(2)}' : '${e.orderNumber} Orders'),
             )).toList(),

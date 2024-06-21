@@ -25,7 +25,7 @@ class Supplier extends Model {
       email = data['email'],
       orders = data['orders'] == null ? null : (data['orders'] as List).map((e) => Order.fromMap(e)).toList(),
       sources = data['sources'] == null ? null : (data['sources'] as List).map((e) => ItemSource.fromMap(e)).toList(),
-      orderCapital = (data['capital'] as int).toDouble(),
+      orderCapital = data['capital'] != null ? (data['capital'] as int).toDouble() : null,
       orderNumber = data['number'],
       super(id: data['id']);
 }

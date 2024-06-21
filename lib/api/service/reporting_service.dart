@@ -32,4 +32,14 @@ class ReportingService {
     return await dio.post('/report/stock-flow-log')
         .then((response) => GeneralResponse(response));
   }
+
+  Future<GeneralResponse> fetchStockLocationSummary() async {
+    return await dio.post('/report/stock-location-summary')
+        .then((response) => GeneralResponse(response));
+  }
+
+  Future<GeneralResponse> fetchDeliveringOrders() async {
+    return await dio.post('/report/delivering-orders')
+        .then((response) => GeneralResponse(response));
+  }
 }

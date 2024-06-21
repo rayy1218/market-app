@@ -1,3 +1,4 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:supermarket_management/api/error_response.dart';
@@ -5,6 +6,7 @@ import 'package:supermarket_management/model/entity/brand.dart';
 import 'package:supermarket_management/model/entity/category.dart';
 import 'package:supermarket_management/model/entity/item_meta.dart';
 import 'package:supermarket_management/model/entity/item_source.dart';
+import 'package:supermarket_management/model/entity/stock_location.dart';
 import 'package:supermarket_management/module/inventory/action/inventory.action.dart';
 import 'package:supermarket_management/module/inventory/ui/create_supply_page.dart';
 
@@ -102,6 +104,7 @@ class _ItemDetailPanelState extends State<ItemDetailPanel> {
 
   List<Brand>? brandDropdown;
   List<Category>? categoryDropdown;
+  List<StockLocation>? locationDropdown;
 
   void fetch() async {
     InventoryAction.of(context).fetchBrandDropdown().then((response) {
@@ -131,6 +134,20 @@ class _ItemDetailPanelState extends State<ItemDetailPanel> {
         categoryDropdown = (response['data'] as List).map((item) => Category.fromMap(item)).toList();
       });
     });
+
+    InventoryAction.of(context).fetchLocations().then((response) {
+      if (response is ErrorResponse) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(response.message))
+        );
+
+        return;
+      }
+
+      setState(() {
+        locationDropdown = (response['data'] as List).map((item) => StockLocation.fromMap(item)).toList();
+      });
+    });
   }
 
   void onEditClick() {
@@ -145,10 +162,10 @@ class _ItemDetailPanelState extends State<ItemDetailPanel> {
     });
   }
 
-  void onSubmit({name, upc, sku, brand, category}) {
+  void onSubmit({name, upc, sku, brand, category, price, location}) {
     InventoryAction.of(context).editItem(
         id: widget.itemMeta.id, name: name, upc: upc, sku: sku, brand: brand,
-        category: category
+        category: category, price: price, location: location
     ).then((response) {
       if (response is ErrorResponse) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -238,7 +255,7 @@ class _ItemDetailPanelState extends State<ItemDetailPanel> {
             initialValue: widget.itemMeta.category?.data?.name,
           ),
         ],
-      ) : ItemDetailForm(itemMeta: widget.itemMeta, brandDropdown: brandDropdown!, categoryDropdown: categoryDropdown!, onCancelClick: onCancelClick, onSubmit: onSubmit),
+      ) : ItemDetailForm(itemMeta: widget.itemMeta, brandDropdown: brandDropdown!, categoryDropdown: categoryDropdown!, locationDropdown: locationDropdown!, onCancelClick: onCancelClick, onSubmit: onSubmit),
       floatingActionButton: editing ? null : FloatingActionButton(
         child: const Icon(Icons.edit),
         onPressed: () => onEditClick(),
@@ -251,13 +268,14 @@ class ItemDetailForm extends StatefulWidget {
   final ItemMeta itemMeta;
   final List<Brand> brandDropdown;
   final List<Category> categoryDropdown;
+  final List<StockLocation> locationDropdown;
   final Function onCancelClick;
   final Function onSubmit;
 
   const ItemDetailForm({
     super.key, required this.itemMeta, required this.brandDropdown,
     required this.categoryDropdown, required this.onCancelClick,
-    required this.onSubmit
+    required this.onSubmit, required this.locationDropdown
   });
 
   @override
@@ -333,6 +351,31 @@ class _ItemDetailFormState extends State<ItemDetailForm> {
               initialValue: widget.itemMeta.category?.data?.id,
               items: widget.categoryDropdown.map((e) => DropdownMenuItem(value: e.id, child: Text(e.name))).toList(),
             ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 16.0, 0, 16.0),
+              child: Text('Sales Information'),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+              child: FormBuilderTextField(
+                inputFormatters: [CurrencyTextInputFormatter.currency(symbol: '\$')],
+                  decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Unit Price'
+                ),
+                initialValue: '\$ ${widget.itemMeta.saleData!.price.toStringAsFixed(2)}',
+                name: 'unit_price'
+              ),
+            ),
+            FormBuilderDropdown(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Default Stock Out Location',
+              ),
+              name: 'stock_out_location',
+              initialValue: widget.itemMeta.saleData!.defaultStockOutLocation.id,
+              items: widget.locationDropdown.map((e) => DropdownMenuItem(value: e.id, child: Text(e.name))).toList(),
+            ),
           ],
         ),
       ),
@@ -352,8 +395,10 @@ class _ItemDetailFormState extends State<ItemDetailForm> {
               final sku = _formKey.currentState?.value['sku'];
               final brand = _formKey.currentState?.value['brand'];
               final category = _formKey.currentState?.value['category'];
+              final price = double.parse(_formKey.currentState!.value['unit_price'].toString().split('\$')[1]);
+              final location = _formKey.currentState?.value['stock_out_location'];
 
-              widget.onSubmit(name: name, upc: upc, sku: sku, brand: brand, category: category);
+              widget.onSubmit(name: name, upc: upc, sku: sku, brand: brand, category: category, price: price, location: location);
             },
             child: const Text('Create')
         ),
@@ -391,7 +436,8 @@ class _ItemSalesPanelState extends State<ItemSalesPanel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Name: ${widget.itemMeta.name}'),
-                    const Text('Selling Price: RM 12'),
+                    Text('Selling Price: \$ ${widget.itemMeta.saleData!.price.toStringAsFixed(2)}'),
+                    Text('Stock Out Location: ${widget.itemMeta.saleData!.defaultStockOutLocation.data!.name}'),
                   ],
                 ),
               ],
@@ -399,6 +445,15 @@ class _ItemSalesPanelState extends State<ItemSalesPanel> {
           ),
         ),
         const Divider(indent: 8, endIndent: 8),
+        Expanded(
+          child: ListView(
+            children: widget.itemMeta.saleData!.checkoutItems!.map((e) => ListTile(
+              title: Text(e.checkout.data!.referenceCode),
+              subtitle: Text('\$ ${e.itemSaleData.data!.price.toStringAsFixed(2)} per unit'),
+              trailing: Text(e.quantity.toString()),
+            )).toList(),
+          )
+        )
       ],
     );
   }
@@ -479,7 +534,7 @@ class _ItemSupplyPanelState extends State<ItemSupplyPanel> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Confirm Delete'),
+          title: const Text('Set as supply'),
           actions: <Widget>[
             TextButton(
               child: const Text('No', style: TextStyle(color: Colors.redAccent)),
@@ -521,7 +576,6 @@ class _ItemSupplyPanelState extends State<ItemSupplyPanel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Name: ${widget.itemMeta.name}'),
-                    const Text('Purchasing Price: RM 12'),
                   ],
                 ),
               ],

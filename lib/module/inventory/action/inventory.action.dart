@@ -218,9 +218,9 @@ class InventoryAction {
     });
   }
 
-  Future editItem({id, name, upc, sku, brand, category}) async {
+  Future editItem({id, name, upc, sku, brand, category, price, location}) async {
     return InventoryService.of(token).editItem(
-        id: id, name: name, upc: upc, sku: sku, brand: brand, category: category
+        id: id, name: name, upc: upc, sku: sku, brand: brand, category: category, price: price, location: location
     ).then((response) {
       switch (response.status) {
         case ResponseStatus.success:

@@ -188,8 +188,13 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   ListTile(
                     title: const Text('Status'),
                     subtitle: Text(entry!.status.label),
-                    trailing: IconButton(
+                    trailing: entry!.status != OrderStatus.completed ? IconButton(
                       icon: const Icon(Icons.edit),
+                      onPressed: () async {
+                        onStatusEditClick();
+                      },
+                    ) : IconButton(
+                      icon: const Icon(Icons.inventory),
                       onPressed: () async {
                         onStatusEditClick();
                       },

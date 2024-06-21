@@ -52,6 +52,7 @@ class Order extends Model {
   DateTime timestamp;
   DateTime updatedTimestamp;
   List<OrderItem>? orderItems;
+  String referenceCode;
 
   Order({
     required this.supplier,
@@ -60,6 +61,7 @@ class Order extends Model {
     required this.remark,
     required this.timestamp,
     required this.updatedTimestamp,
+    required this.referenceCode,
   });
 
   Order.fromMap(Map<String, dynamic> data):
@@ -76,5 +78,6 @@ class Order extends Model {
       orderItems = data['order_items'] == null
           ? null
           : (data['order_items'] as List).map((e) => OrderItem.fromMap(e)).toList(),
+      referenceCode = data['reference_code'],
       super(id: data['id']);
 }

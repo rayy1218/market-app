@@ -10,7 +10,7 @@ class CreateSupplyPage extends StatefulWidget {
   final ItemMeta itemMeta;
   final ItemSource itemSource;
 
-  CreateSupplyPage({super.key, required this.itemMeta, required this.itemSource});
+  const CreateSupplyPage({super.key, required this.itemMeta, required this.itemSource});
 
   @override
   State<CreateSupplyPage> createState() => _CreateSupplyPageState();

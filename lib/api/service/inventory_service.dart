@@ -102,7 +102,7 @@ class InventoryService {
         .then((response) => GeneralResponse(response));
   }
 
-  Future<GeneralResponse> editItem({id, name, upc, sku, brand, category}) async {
+  Future<GeneralResponse> editItem({id, name, upc, sku, brand, category, price, location}) async {
     return await dio.put('/inventory/item/$id',
       data: {
         'name': name,
@@ -110,6 +110,8 @@ class InventoryService {
         'sku': sku,
         'brand': brand,
         'category': category,
+        'price': price,
+        'default_stock_location': location
       }
     ).then((response) => GeneralResponse(response));
   }

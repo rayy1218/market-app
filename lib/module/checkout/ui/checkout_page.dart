@@ -7,6 +7,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:supermarket_management/api/error_response.dart';
 import 'package:supermarket_management/model/entity/customer.dart';
 import 'package:supermarket_management/model/entity/item_meta.dart';
+import 'package:supermarket_management/module/checkout/action/checkout_action.dart';
 import 'package:supermarket_management/module/customer/action/customer.action.dart';
 import 'package:supermarket_management/module/inventory/action/inventory.action.dart';
 
@@ -33,7 +34,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   List<CheckoutQueue> items = [];
   int? customerId;
-
 
   void fetch() async {
     CustomerAction.of(context).fetchCustomers().then((response) {
@@ -114,6 +114,29 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   Tab(text: 'Items'),
                 ],
               ),
+              actions: [
+                ...itemDatabase != null ? [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => AddCheckoutItemPage(items: itemDatabase!, onAdd: (ItemMeta item) {
+                        final checkout = items.firstWhereOrNull((element) => element.item.id == item.id);
+                        if (checkout == null) {
+                          setState(() {
+                            items.add(CheckoutQueue(item: item, quantity: 1));
+                          });
+                        }
+                        else {
+                          setState(() {
+                            checkout.quantity += 1;
+                          });
+                        }
+                      }))
+                    );
+                  },
+                  icon: const Icon(Icons.add)
+                )] : [],
+              ],
             ),
             body: TabBarView(
               children: [
@@ -143,7 +166,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   children: [
                     ...items.map((e) => ListTile(
                       title: Text('${e.item.name} (${e.item.brand!.data!.name})'),
-                      subtitle: Text('\$${e.item.universalProductCode} per unit'),
+                      subtitle: Text('\$${e.item.saleData!.price.toStringAsFixed(2)} per unit'),
                       trailing: Text('${e.quantity} unit(s)'),
                     )),
                   ],
@@ -205,7 +228,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     const Divider(indent: 8, endIndent: 8),
                     ...items.map((e) => ListTile(
                       title: Text('${e.item.name} (${e.item.brand!.data!.name})'),
-                      subtitle: Text('\$${e.item.universalProductCode} per unit'),
+                      subtitle: Text('\$${e.item.saleData!.price.toStringAsFixed(2)} per unit'),
                       trailing: Text('${e.quantity} unit(s)'),
                     )),
                   ],
@@ -269,7 +292,26 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              final customer = customerId;
+              final checkoutItems = items.map((e) => {
+                'item_id': e.item.id,
+                'quantity': e.quantity,
+              }).toList();
+
+              CheckoutAction.of(context).create(customer: customer, items: checkoutItems).then((response) {
+                if (response is ErrorResponse) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(response.message)),
+                  );
+
+                  return;
+                }
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Checkout Successfully')),
+                );
+                Navigator.of(context).pop();
+              });
             },
             child: const Text('Checkout')
           ),
@@ -282,6 +324,30 @@ class _CheckoutPageState extends State<CheckoutPage> {
     return Scaffold(
       body: itemDatabase != null && customerDatabase != null ? formOnStep() : const Center(child: CircularProgressIndicator()),
       persistentFooterButtons: itemDatabase != null && customerDatabase != null ? footButtonOnStep() : null,
+    );
+  }
+}
+
+class AddCheckoutItemPage extends StatelessWidget {
+  final List<ItemMeta> items;
+  final Function onAdd;
+
+  const AddCheckoutItemPage({super.key, required this.items, required this.onAdd});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: ListView(
+        children: items.map((e) => ListTile(
+          title: Text(e.name),
+          subtitle: Text(e.universalProductCode),
+          onTap: () {
+            onAdd(e);
+            Navigator.of(context).pop();
+          },
+        )).toList(),
+      ),
     );
   }
 }

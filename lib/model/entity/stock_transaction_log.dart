@@ -4,6 +4,7 @@ import 'package:supermarket_management/model/entity/order_item.dart';
 import 'package:supermarket_management/model/entity/stock_location.dart';
 import 'package:supermarket_management/model/entity/user.dart';
 import 'package:supermarket_management/model/model.dart';
+import 'package:supermarket_management/model/entity/checkout_item.dart';
 
 enum StockTransactionType {
   stockIn(value: 'stock_in', label: 'Stock In'),
@@ -36,13 +37,13 @@ class StockTransactionLog extends Model {
   StockTransactionLog.fromMap(Map<String, dynamic> data):
       user = User.fromMap(data['user']),
       type = StockTransactionType.fromString(data['type'])!,
-      stockInItem = ItemMeta.fromMap(data['stock_in_item']),
-      stockOutItem = ItemMeta.fromMap(data['stock_in_item']),
-      stockInLocation = StockLocation.fromMap(data['stock_in_location']),
-      stockOutLocation =  StockLocation.fromMap(data['stock_in_location']),
+      stockInItem = data['stock_in_item'] != null ? ItemMeta.fromMap(data['stock_in_item']) : null,
+      stockOutItem = data['stock_out_item'] != null ? ItemMeta.fromMap(data['stock_out_item']) : null,
+      stockInLocation = data['stock_in_location'] != null ? StockLocation.fromMap(data['stock_in_location']) : null,
+      stockOutLocation =  data['stock_out_location'] != null ? StockLocation.fromMap(data['stock_out_location']) : null,
       stockInQuantity = data['stock_in_quantity'],
       stockOutQuantity = data['stock_out_quantity'],
-      checkoutItem = data['checkout_item'],
+      checkoutItem = data['checkout_item'] != null ? CheckoutItem.fromMap(data['checkout_item']) : null,
       orderItem = data['order_item'],
       createdAt = DateTime.parse(data['created_at']),
       super(id: data['id']);

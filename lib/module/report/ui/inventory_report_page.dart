@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:supermarket_management/api/error_response.dart';
@@ -184,7 +183,7 @@ class StockTransactionLogCard extends StatelessWidget {
       case StockTransactionType.orderStockIn:
       // TODO: Handle this case.
       case StockTransactionType.checkoutStockOut:
-      // TODO: Handle this case.
+        return const Icon(Icons.attach_money);
     }
   }
 
@@ -193,7 +192,7 @@ class StockTransactionLogCard extends StatelessWidget {
       case StockTransactionType.stockIn:
         return Text('${log.stockInItem!.name} x ${log.stockInQuantity} to ${log.stockInLocation!.name}\nAt ${DateFormat('MMM d, y HH:mm').format(log.createdAt)}\nBy ${log.user!.username}');
       case StockTransactionType.stockOut:
-        return Text('${log.stockOutItem!.name} x ${log.stockOutItem} from ${log.stockOutLocation!.name}\nAt ${DateFormat('MMM d, y HH:mm').format(log.createdAt)}\nBy ${log.user!.username}');
+        return Text('${log.stockOutItem!.name} x ${log.stockOutQuantity} from ${log.stockOutLocation!.name}\nAt ${DateFormat('MMM d, y HH:mm').format(log.createdAt)}\nBy ${log.user!.username}');
       case StockTransactionType.transfer:
         return Text('${log.stockInItem!.name} x ${log.stockInQuantity} from ${log.stockOutLocation!.name} to ${log.stockInLocation!.name}\nAt ${DateFormat('MMM d, y HH:mm').format(log.createdAt)}\nBy ${log.user!.username}');
       case StockTransactionType.split:
@@ -201,7 +200,7 @@ class StockTransactionLogCard extends StatelessWidget {
       case StockTransactionType.orderStockIn:
         // TODO: Handle this case.
       case StockTransactionType.checkoutStockOut:
-        // TODO: Handle this case.
+        return Text('${log.stockOutItem!.name} x ${log.stockOutQuantity} from ${log.stockOutLocation!.name}\n${log.checkoutItem!.checkout.data!.referenceCode}\nAt ${DateFormat('MMM d, y HH:mm').format(log.createdAt)}\nBy ${log.user!.username}');
     }
   }
 

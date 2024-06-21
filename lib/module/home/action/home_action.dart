@@ -51,5 +51,33 @@ class HomeAction {
     });
   }
 
+  Future fetchStockLocationSummary() async {
+    return ReportingService.of(token).fetchStockLocationSummary().then((response) {
+      switch (response.status) {
+        case ResponseStatus.success:
+          return response.data;
 
+        case ResponseStatus.rejected:
+          return response.data['message'];
+
+        case ResponseStatus.error:
+          return 'FAILED_SERVER';
+      }
+    });
+  }
+
+  Future fetchDeliveringOrders() async {
+    return ReportingService.of(token).fetchDeliveringOrders().then((response) {
+      switch (response.status) {
+        case ResponseStatus.success:
+          return response.data;
+
+        case ResponseStatus.rejected:
+          return response.data['message'];
+
+        case ResponseStatus.error:
+          return 'FAILED_SERVER';
+      }
+    });
+  }
 }
