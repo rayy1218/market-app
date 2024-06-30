@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/supplier.dart';
-import 'package:supermarket_management/module/supply_chain/action/supply.action.dart';
-import 'package:supermarket_management/module/supply_chain/ui/create_order_page.dart';
-import 'package:supermarket_management/module/supply_chain/ui/create_source_page.dart';
-import 'package:supermarket_management/module/supply_chain/ui/edit_source_page.dart';
-import 'package:supermarket_management/module/supply_chain/ui/supplier_profile_edit_page.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/helper.dart';
+import 'package:MarketEase/model/entity/supplier.dart';
+import 'package:MarketEase/module/supply_chain/action/supply.action.dart';
+import 'package:MarketEase/module/supply_chain/ui/create_order_page.dart';
+import 'package:MarketEase/module/supply_chain/ui/create_source_page.dart';
+import 'package:MarketEase/module/supply_chain/ui/edit_source_page.dart';
+import 'package:MarketEase/module/supply_chain/ui/supplier_profile_edit_page.dart';
 
 class SupplierDetailPage extends StatefulWidget {
   final int id;
@@ -188,7 +189,7 @@ class SupplierSourceTab extends StatelessWidget {
       body: supplier.sources!.isNotEmpty ? ListView(
         children: supplier.sources!.map((e) => ListTile(
           title: Text(e.itemMeta.data!.name),
-          subtitle: Text('\$${e.unitPrice} per unit, ${e.minOrderQuantity} minimum'),
+          subtitle: Text('${Helper.getCurrencyString(e.unitPrice)} per unit, ${e.minOrderQuantity} minimum'),
           trailing: Text('${e.estimatedLeadTime} day(s)'),
           onTap: () {
             Navigator.of(context).push(

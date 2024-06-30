@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supermarket_management/api/service/authentication_service.dart';
-import 'package:supermarket_management/model/entity/access_right.dart';
-import 'package:supermarket_management/module/auth/ui/login_page.dart';
-import 'package:supermarket_management/module/home/ui/home_page.dart';
+import 'package:MarketEase/api/service/authentication_service.dart';
+import 'package:MarketEase/model/entity/access_right.dart';
+import 'package:MarketEase/module/auth/ui/login_page.dart';
+import 'package:MarketEase/module/home/ui/home_page.dart';
 
 void main() async {
   runApp(MultiBlocProvider(

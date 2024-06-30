@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:supermarket_management/module/report/ui/inventory_report_page.dart';
-import 'package:supermarket_management/module/report/ui/sale_report_page.dart';
-import 'package:supermarket_management/module/report/ui/shift_report_page.dart';
-import 'package:supermarket_management/module/report/ui/supply_chain_report.dart';
+import 'package:MarketEase/module/report/ui/inventory_report_page.dart';
+import 'package:MarketEase/module/report/ui/sale_report_page.dart';
+import 'package:MarketEase/module/report/ui/shift_report_page.dart';
+import 'package:MarketEase/module/report/ui/supply_chain_report.dart';
 
 class ReportPage extends StatefulWidget {
   const ReportPage({super.key});

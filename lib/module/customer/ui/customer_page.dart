@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/customer.dart';
-import 'package:supermarket_management/module/customer/action/customer.action.dart';
-import 'package:supermarket_management/module/customer/ui/create_customer_profile_page.dart';
-import 'package:supermarket_management/module/customer/ui/customer_detail_page.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/model/entity/customer.dart';
+import 'package:MarketEase/module/customer/action/customer.action.dart';
+import 'package:MarketEase/module/customer/ui/create_customer_profile_page.dart';
+import 'package:MarketEase/module/customer/ui/customer_detail_page.dart';
 
 class CustomerPage extends StatefulWidget {
   const CustomerPage({super.key});

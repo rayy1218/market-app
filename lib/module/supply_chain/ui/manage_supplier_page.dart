@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/supplier.dart';
-import 'package:supermarket_management/module/supply_chain/action/supply.action.dart';
-import 'package:supermarket_management/module/supply_chain/ui/supplier_detail_page.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/model/entity/supplier.dart';
+import 'package:MarketEase/module/supply_chain/action/supply.action.dart';
+import 'package:MarketEase/module/supply_chain/ui/supplier_detail_page.dart';
 
 class ManageSupplierPage extends StatefulWidget {
   const ManageSupplierPage({super.key});

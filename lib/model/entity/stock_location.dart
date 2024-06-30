@@ -1,6 +1,6 @@
-import 'package:supermarket_management/model/entity/item_stock_data.dart';
-import 'package:supermarket_management/model/model.dart';
-import 'package:supermarket_management/model/model_or_id.dart';
+import 'package:MarketEase/model/entity/item_stock_data.dart';
+import 'package:MarketEase/model/model.dart';
+import 'package:MarketEase/model/model_or_id.dart';
 
 class StockLocation extends Model {
   ModelOrId<StockLocation>? parent;

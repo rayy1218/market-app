@@ -1,7 +1,7 @@
-import 'package:supermarket_management/model/entity/item_meta.dart';
-import 'package:supermarket_management/model/entity/supplier.dart';
-import 'package:supermarket_management/model/model.dart';
-import 'package:supermarket_management/model/model_or_id.dart';
+import 'package:MarketEase/model/entity/item_meta.dart';
+import 'package:MarketEase/model/entity/supplier.dart';
+import 'package:MarketEase/model/model.dart';
+import 'package:MarketEase/model/model_or_id.dart';
 
 class ItemSource extends Model {
   ModelOrId<Supplier> supplier;

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:supermarket_management/api/general_response.dart';
-import 'package:supermarket_management/api/master_service.dart';
+import 'package:MarketEase/api/general_response.dart';
+import 'package:MarketEase/api/master_service.dart';
 
 class SupplyService {
   late Dio dio;

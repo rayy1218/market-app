@@ -1,10 +1,10 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/brand.dart';
-import 'package:supermarket_management/model/entity/category.dart';
-import 'package:supermarket_management/module/inventory/action/inventory.action.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/model/entity/brand.dart';
+import 'package:MarketEase/model/entity/category.dart';
+import 'package:MarketEase/module/inventory/action/inventory.action.dart';
 
 class CreateProductPage extends StatefulWidget {
   const CreateProductPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/module/customer/action/customer.action.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/module/customer/action/customer.action.dart';
 
 class CreateCustomerProfilePage extends StatefulWidget {
   const CreateCustomerProfilePage({super.key});

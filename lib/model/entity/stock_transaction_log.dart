@@ -1,10 +1,10 @@
 import 'package:collection/collection.dart';
-import 'package:supermarket_management/model/entity/item_meta.dart';
-import 'package:supermarket_management/model/entity/order_item.dart';
-import 'package:supermarket_management/model/entity/stock_location.dart';
-import 'package:supermarket_management/model/entity/user.dart';
-import 'package:supermarket_management/model/model.dart';
-import 'package:supermarket_management/model/entity/checkout_item.dart';
+import 'package:MarketEase/model/entity/item_meta.dart';
+import 'package:MarketEase/model/entity/order_item.dart';
+import 'package:MarketEase/model/entity/stock_location.dart';
+import 'package:MarketEase/model/entity/user.dart';
+import 'package:MarketEase/model/model.dart';
+import 'package:MarketEase/model/entity/checkout_item.dart';
 
 enum StockTransactionType {
   stockIn(value: 'stock_in', label: 'Stock In'),

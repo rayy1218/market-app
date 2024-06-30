@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:supermarket_management/model/entity/access_right.dart';
-import 'package:supermarket_management/module/managerial/action/group.action.dart';
+import 'package:MarketEase/model/entity/access_right.dart';
+import 'package:MarketEase/module/managerial/action/group.action.dart';
 
 class CreateGroupPage extends StatefulWidget {
   const CreateGroupPage({super.key});

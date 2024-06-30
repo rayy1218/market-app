@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/supplier.dart';
-import 'package:supermarket_management/module/report/action/report_action.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/model/entity/supplier.dart';
+import 'package:MarketEase/module/report/action/report_action.dart';
 
 class SupplyChainReport extends StatefulWidget {
   const SupplyChainReport({super.key});
@@ -100,7 +100,7 @@ class SupplyOverviewCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('RM ${cost.toStringAsFixed(2).toString()}', style: const TextStyle(color: Colors.greenAccent, fontSize: 18)),
+                      Text(NumberFormat.currency(symbol: '\$').format(cost), style: const TextStyle(color: Colors.greenAccent, fontSize: 18)),
                       const Text('Restocking Cost'),
                     ],
                   ),
@@ -173,15 +173,8 @@ class _TopOrderSupplierCardState extends State<TopOrderSupplierCard> {
               contentPadding: const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
               leading: Text((index + 1).toString(), style: const TextStyle(fontSize: 14)),
               title: Text(e.name),
-              trailing: Text(useValue ? 'RM ${e.orderCapital!.toStringAsFixed(2)}' : '${e.orderNumber} Orders'),
+              trailing: Text(useValue ? NumberFormat.currency(symbol: '\$').format(e.orderCapital!) : '${e.orderNumber} Orders'),
             )).toList(),
-            // const Divider(),
-            // Row(
-            //   children: [
-            //     const Expanded(child: Text('More Details')),
-            //     IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward_ios)),
-            //   ],
-            // )
           ],
         ),
       ),

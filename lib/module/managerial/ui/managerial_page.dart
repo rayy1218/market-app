@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:supermarket_management/model/entity/group.dart';
-import 'package:supermarket_management/model/entity/user.dart';
-import 'package:supermarket_management/module/managerial/action/employee.action.dart';
-import 'package:supermarket_management/module/managerial/action/group.action.dart';
-import 'package:supermarket_management/module/managerial/ui/create_employee_page.dart';
-import 'package:supermarket_management/module/managerial/ui/create_group_page.dart';
-import 'package:supermarket_management/module/managerial/ui/employee_detail_page.dart';
-import 'package:supermarket_management/module/managerial/ui/group_detail_page.dart';
+import 'package:MarketEase/model/entity/group.dart';
+import 'package:MarketEase/model/entity/user.dart';
+import 'package:MarketEase/module/managerial/action/employee.action.dart';
+import 'package:MarketEase/module/managerial/action/group.action.dart';
+import 'package:MarketEase/module/managerial/ui/create_employee_page.dart';
+import 'package:MarketEase/module/managerial/ui/create_group_page.dart';
+import 'package:MarketEase/module/managerial/ui/employee_detail_page.dart';
+import 'package:MarketEase/module/managerial/ui/group_detail_page.dart';
 
 class ManagerialPage extends StatefulWidget {
   const ManagerialPage({super.key});

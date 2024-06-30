@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supermarket_management/module/home/ui/dashboard_page.dart';
-import 'package:supermarket_management/module/home/ui/operation_page.dart';
-import 'package:supermarket_management/module/home/ui/settings_page.dart';
-import 'package:supermarket_management/module/home/ui/report_page.dart';
-import 'package:supermarket_management/main.dart';
+import 'package:MarketEase/module/home/ui/dashboard_page.dart';
+import 'package:MarketEase/module/home/ui/operation_page.dart';
+import 'package:MarketEase/module/home/ui/settings_page.dart';
+import 'package:MarketEase/module/home/ui/report_page.dart';
+import 'package:MarketEase/main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

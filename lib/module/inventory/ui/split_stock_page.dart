@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/item_meta.dart';
-import 'package:supermarket_management/model/entity/item_stock_data.dart';
-import 'package:supermarket_management/model/entity/stock_location.dart';
-import 'package:supermarket_management/module/inventory/action/inventory.action.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/model/entity/item_meta.dart';
+import 'package:MarketEase/model/entity/item_stock_data.dart';
+import 'package:MarketEase/model/entity/stock_location.dart';
+import 'package:MarketEase/module/inventory/action/inventory.action.dart';
 
 class SplitStockPage extends StatefulWidget {
   const SplitStockPage({super.key});

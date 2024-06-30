@@ -1,11 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:supermarket_management/model/entity/access_right.dart';
-import 'package:supermarket_management/model/entity/group.dart';
-import 'package:supermarket_management/model/entity/group_access_right.dart';
-import 'package:supermarket_management/model/entity/user.dart';
-import 'package:supermarket_management/module/managerial/action/group.action.dart';
-import 'package:supermarket_management/module/managerial/ui/employee_detail_page.dart';
+import 'package:MarketEase/model/entity/access_right.dart';
+import 'package:MarketEase/model/entity/group.dart';
+import 'package:MarketEase/model/entity/group_access_right.dart';
+import 'package:MarketEase/model/entity/user.dart';
+import 'package:MarketEase/module/managerial/action/group.action.dart';
+import 'package:MarketEase/module/managerial/ui/employee_detail_page.dart';
 
 class GroupDetailPage extends StatefulWidget {
   const GroupDetailPage({super.key, required this.id});

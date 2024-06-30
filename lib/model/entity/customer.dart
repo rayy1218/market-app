@@ -1,4 +1,4 @@
-import 'package:supermarket_management/model/model.dart';
+import 'package:MarketEase/model/model.dart';
 
 class Customer extends Model {
   Customer({

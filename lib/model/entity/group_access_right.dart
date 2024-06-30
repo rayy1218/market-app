@@ -1,4 +1,4 @@
-import 'package:supermarket_management/model/model.dart';
+import 'package:MarketEase/model/model.dart';
 
 class GroupAccessRight extends Model {
   GroupAccessRight({super.id, super.uuid, required this.name, required this.label, required this.enabled});

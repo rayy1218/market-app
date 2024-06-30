@@ -1,7 +1,7 @@
-import 'package:supermarket_management/model/entity/customer.dart';
-import 'package:supermarket_management/model/entity/user.dart';
-import 'package:supermarket_management/model/model.dart';
-import 'package:supermarket_management/model/model_or_id.dart';
+import 'package:MarketEase/model/entity/customer.dart';
+import 'package:MarketEase/model/entity/user.dart';
+import 'package:MarketEase/model/model.dart';
+import 'package:MarketEase/model/model_or_id.dart';
 
 class Checkout extends Model {
   Checkout({

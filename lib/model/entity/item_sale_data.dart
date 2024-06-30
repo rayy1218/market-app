@@ -1,8 +1,8 @@
-import 'package:supermarket_management/model/entity/checkout_item.dart';
-import 'package:supermarket_management/model/entity/item_meta.dart';
-import 'package:supermarket_management/model/entity/stock_location.dart';
-import 'package:supermarket_management/model/model.dart';
-import 'package:supermarket_management/model/model_or_id.dart';
+import 'package:MarketEase/model/entity/checkout_item.dart';
+import 'package:MarketEase/model/entity/item_meta.dart';
+import 'package:MarketEase/model/entity/stock_location.dart';
+import 'package:MarketEase/model/model.dart';
+import 'package:MarketEase/model/model_or_id.dart';
 
 class ItemSaleData extends Model {
   ItemSaleData({

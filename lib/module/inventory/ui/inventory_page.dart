@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/item_meta.dart';
-import 'package:supermarket_management/model/entity/stock_location.dart';
-import 'package:supermarket_management/module/inventory/action/inventory.action.dart';
-import 'package:supermarket_management/module/inventory/ui/create_location_page.dart';
-import 'package:supermarket_management/module/inventory/ui/create_product_page.dart';
-import 'package:supermarket_management/module/inventory/ui/product_details_page.dart';
-import 'package:supermarket_management/module/inventory/ui/split_stock_page.dart';
-import 'package:supermarket_management/module/inventory/ui/stock_in_page.dart';
-import 'package:supermarket_management/module/inventory/ui/stock_transfer_page.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/model/entity/item_meta.dart';
+import 'package:MarketEase/model/entity/stock_location.dart';
+import 'package:MarketEase/module/inventory/action/inventory.action.dart';
+import 'package:MarketEase/module/inventory/ui/create_location_page.dart';
+import 'package:MarketEase/module/inventory/ui/create_product_page.dart';
+import 'package:MarketEase/module/inventory/ui/product_details_page.dart';
+import 'package:MarketEase/module/inventory/ui/split_stock_page.dart';
+import 'package:MarketEase/module/inventory/ui/stock_in_page.dart';
+import 'package:MarketEase/module/inventory/ui/stock_transfer_page.dart';
 
 class InventoryPage extends StatefulWidget {
   const InventoryPage({super.key});

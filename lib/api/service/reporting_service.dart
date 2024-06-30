@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:supermarket_management/api/general_response.dart';
-import 'package:supermarket_management/api/master_service.dart';
+import 'package:MarketEase/api/general_response.dart';
+import 'package:MarketEase/api/master_service.dart';
 
 class ReportingService {
   late Dio dio;
@@ -40,6 +40,11 @@ class ReportingService {
 
   Future<GeneralResponse> fetchDeliveringOrders() async {
     return await dio.post('/report/delivering-orders')
+        .then((response) => GeneralResponse(response));
+  }
+
+  Future<GeneralResponse> fetchFinanceReport() async {
+    return await dio.post('/report/inventory-finance-summary')
         .then((response) => GeneralResponse(response));
   }
 }

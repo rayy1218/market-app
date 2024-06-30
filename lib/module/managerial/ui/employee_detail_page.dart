@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
-import 'package:supermarket_management/module/managerial/action/employee.action.dart';
-import 'package:supermarket_management/model/entity/user.dart';
-import 'package:supermarket_management/model/entity/group.dart';
+import 'package:MarketEase/module/managerial/action/employee.action.dart';
+import 'package:MarketEase/model/entity/user.dart';
+import 'package:MarketEase/model/entity/group.dart';
 
 class EmployeeDetailPage extends StatefulWidget {
   const EmployeeDetailPage({super.key, required this.id, this.allowDelete});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:supermarket_management/api/error_response.dart';
+import 'package:MarketEase/api/error_response.dart';
 import 'package:intl/intl.dart';
-import 'package:supermarket_management/model/entity/order.dart';
-import 'package:supermarket_management/module/supply_chain/action/supply.action.dart';
-import 'package:supermarket_management/module/supply_chain/ui/order_detail_page.dart';
+import 'package:MarketEase/model/entity/order.dart';
+import 'package:MarketEase/module/supply_chain/action/supply.action.dart';
+import 'package:MarketEase/module/supply_chain/ui/order_detail_page.dart';
 
 class ManageOrderPage extends StatefulWidget {
   const ManageOrderPage({super.key});

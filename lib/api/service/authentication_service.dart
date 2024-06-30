@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:supermarket_management/api/general_response.dart';
-import 'package:supermarket_management/api/master_service.dart';
-import 'package:supermarket_management/model/entity/access_right.dart';
+import 'package:MarketEase/api/general_response.dart';
+import 'package:MarketEase/api/master_service.dart';
+import 'package:MarketEase/model/entity/access_right.dart';
 
 class AuthenticationService {
   late Dio dio;

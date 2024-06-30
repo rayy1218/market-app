@@ -1,4 +1,4 @@
-import 'package:supermarket_management/model/model.dart';
+import 'package:MarketEase/model/model.dart';
 
 class Address extends Model {
   String? line1, line2, city, state, postcode, country;

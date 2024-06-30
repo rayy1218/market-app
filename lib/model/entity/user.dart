@@ -1,7 +1,7 @@
-import 'package:supermarket_management/model/entity/company.dart';
-import 'package:supermarket_management/model/entity/group.dart';
-import 'package:supermarket_management/model/model.dart';
-import 'package:supermarket_management/model/model_or_id.dart';
+import 'package:MarketEase/model/entity/company.dart';
+import 'package:MarketEase/model/entity/group.dart';
+import 'package:MarketEase/model/model.dart';
+import 'package:MarketEase/model/model_or_id.dart';
 
 class User extends Model {
   User({

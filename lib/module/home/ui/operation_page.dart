@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:supermarket_management/module/checkout/ui/checkout_page.dart';
-import 'package:supermarket_management/module/customer/ui/customer_page.dart';
-import 'package:supermarket_management/module/inventory/ui/inventory_page.dart';
-import 'package:supermarket_management/module/managerial/ui/managerial_page.dart';
-import 'package:supermarket_management/module/shift/ui/shift_page.dart';
-import 'package:supermarket_management/module/supply_chain/ui/supply_chain_page.dart';
+import 'package:MarketEase/module/checkout/ui/checkout_page.dart';
+import 'package:MarketEase/module/customer/ui/customer_page.dart';
+import 'package:MarketEase/module/inventory/ui/inventory_page.dart';
+import 'package:MarketEase/module/managerial/ui/managerial_page.dart';
+import 'package:MarketEase/module/shift/ui/shift_page.dart';
+import 'package:MarketEase/module/supply_chain/ui/supply_chain_page.dart';
 
 class OperationPage extends StatefulWidget {
   const OperationPage({super.key});

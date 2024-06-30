@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/item_meta.dart';
-import 'package:supermarket_management/model/entity/item_source.dart';
-import 'package:supermarket_management/model/entity/item_supply_data.dart';
-import 'package:supermarket_management/module/inventory/action/inventory.action.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/model/entity/item_meta.dart';
+import 'package:MarketEase/model/entity/item_source.dart';
+import 'package:MarketEase/model/entity/item_supply_data.dart';
+import 'package:MarketEase/module/inventory/action/inventory.action.dart';
 
 class CreateSupplyPage extends StatefulWidget {
   final ItemMeta itemMeta;
@@ -23,7 +23,7 @@ class _CreateSupplyPageState extends State<CreateSupplyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Customer Profile'),
+        title: const Text('Setup Item Supply'),
       ),
       body: FormBuilder(
           key: _formKey,

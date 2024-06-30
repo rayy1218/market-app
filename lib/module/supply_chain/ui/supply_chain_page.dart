@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:supermarket_management/module/supply_chain/ui/create_order_page.dart';
-import 'package:supermarket_management/module/supply_chain/ui/create_supplier_page.dart';
-import 'package:supermarket_management/module/supply_chain/ui/manage_order_page.dart';
-import 'package:supermarket_management/module/supply_chain/ui/manage_supplier_page.dart';
+import 'package:MarketEase/module/supply_chain/ui/create_order_page.dart';
+import 'package:MarketEase/module/supply_chain/ui/create_supplier_page.dart';
+import 'package:MarketEase/module/supply_chain/ui/manage_order_page.dart';
+import 'package:MarketEase/module/supply_chain/ui/manage_supplier_page.dart';
 
 
 

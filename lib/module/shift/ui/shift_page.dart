@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/shift_record.dart';
-import 'package:supermarket_management/module/shift/action/shift.action.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/model/entity/shift_record.dart';
+import 'package:MarketEase/module/shift/action/shift.action.dart';
 
 class ShiftPage extends StatefulWidget {
   const ShiftPage({super.key});

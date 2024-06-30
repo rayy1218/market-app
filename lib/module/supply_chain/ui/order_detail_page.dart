@@ -3,9 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/order.dart';
-import 'package:supermarket_management/module/supply_chain/action/supply.action.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/helper.dart';
+import 'package:MarketEase/model/entity/order.dart';
+import 'package:MarketEase/module/supply_chain/action/supply.action.dart';
 
 class OrderDetailPage extends StatefulWidget {
   final int id;
@@ -223,7 +224,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   const Divider(indent: 8, endIndent: 8),
                   ...entry!.orderItems!.map((e) => ListTile(
                     title: Text('${e.itemSource.data!.itemMeta.data!.name} (${e.itemSource.data!.itemMeta.data!.brand!.data!.name})'),
-                    subtitle: Text('\$${e.itemSource.data!.unitPrice} per unit'),
+                    subtitle: Text('${Helper.getCurrencyString(e.itemSource.data!.unitPrice)} per unit'),
                     trailing: Text('${e.quantity} unit(s)'),
                   )),
                 ],

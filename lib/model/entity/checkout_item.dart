@@ -1,7 +1,7 @@
-import 'package:supermarket_management/model/entity/checkout.dart';
-import 'package:supermarket_management/model/entity/item_sale_data.dart';
-import 'package:supermarket_management/model/model.dart';
-import 'package:supermarket_management/model/model_or_id.dart';
+import 'package:MarketEase/model/entity/checkout.dart';
+import 'package:MarketEase/model/entity/item_sale_data.dart';
+import 'package:MarketEase/model/model.dart';
+import 'package:MarketEase/model/model_or_id.dart';
 
 class CheckoutItem extends Model {
   CheckoutItem({

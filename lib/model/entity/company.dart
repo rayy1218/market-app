@@ -1,6 +1,6 @@
-import 'package:supermarket_management/model/model.dart';
-import 'package:supermarket_management/model/model_or_id.dart';
-import 'package:supermarket_management/model/entity/address.dart';
+import 'package:MarketEase/model/model.dart';
+import 'package:MarketEase/model/model_or_id.dart';
+import 'package:MarketEase/model/entity/address.dart';
 
 class Company extends Model {
   Company({super.id, super.uuid, required this.address, required this.name, required this.status});

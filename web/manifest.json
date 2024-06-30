@@ -1,6 +1,6 @@
 {
-    "name": "supermarket_management",
-    "short_name": "supermarket_management",
+    "name": "MarketEase",
+    "short_name": "MarketEase",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

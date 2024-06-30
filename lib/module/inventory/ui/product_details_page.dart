@@ -1,14 +1,15 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/brand.dart';
-import 'package:supermarket_management/model/entity/category.dart';
-import 'package:supermarket_management/model/entity/item_meta.dart';
-import 'package:supermarket_management/model/entity/item_source.dart';
-import 'package:supermarket_management/model/entity/stock_location.dart';
-import 'package:supermarket_management/module/inventory/action/inventory.action.dart';
-import 'package:supermarket_management/module/inventory/ui/create_supply_page.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/helper.dart';
+import 'package:MarketEase/model/entity/brand.dart';
+import 'package:MarketEase/model/entity/category.dart';
+import 'package:MarketEase/model/entity/item_meta.dart';
+import 'package:MarketEase/model/entity/item_source.dart';
+import 'package:MarketEase/model/entity/stock_location.dart';
+import 'package:MarketEase/module/inventory/action/inventory.action.dart';
+import 'package:MarketEase/module/inventory/ui/create_supply_page.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final int id;
@@ -436,7 +437,7 @@ class _ItemSalesPanelState extends State<ItemSalesPanel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Name: ${widget.itemMeta.name}'),
-                    Text('Selling Price: \$ ${widget.itemMeta.saleData!.price.toStringAsFixed(2)}'),
+                    Text('Selling Price: ${Helper.getCurrencyString(widget.itemMeta.saleData!.price)}'),
                     Text('Stock Out Location: ${widget.itemMeta.saleData!.defaultStockOutLocation.data!.name}'),
                   ],
                 ),
@@ -449,7 +450,7 @@ class _ItemSalesPanelState extends State<ItemSalesPanel> {
           child: ListView(
             children: widget.itemMeta.saleData!.checkoutItems!.map((e) => ListTile(
               title: Text(e.checkout.data!.referenceCode),
-              subtitle: Text('\$ ${e.itemSaleData.data!.price.toStringAsFixed(2)} per unit'),
+              subtitle: Text('${Helper.getCurrencyString(e.itemSaleData.data!.price)} per unit'),
               trailing: Text(e.quantity.toString()),
             )).toList(),
           )
@@ -604,7 +605,7 @@ class _ItemSupplyPanelState extends State<ItemSupplyPanel> {
                     ),
                   ),
                   title: Text(e.supplier.data!.name),
-                  subtitle: Text('\$${e.unitPrice} per unit, ${e.minOrderQuantity} minimum'),
+                  subtitle: Text('${Helper.getCurrencyString(e.unitPrice)} per unit, ${e.minOrderQuantity} minimum'),
                   trailing: Text('${e.estimatedLeadTime} day(s)'),
                   onTap: () => onSourceClick(e),
                 );

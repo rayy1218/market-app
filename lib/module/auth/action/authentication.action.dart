@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supermarket_management/api/service/authentication_service.dart';
-import 'package:supermarket_management/api/general_response.dart';
-import 'package:supermarket_management/main.dart';
+import 'package:MarketEase/api/service/authentication_service.dart';
+import 'package:MarketEase/api/general_response.dart';
+import 'package:MarketEase/main.dart';
 
 class AuthenticationAction {
   static Future login(context, email, password) async {

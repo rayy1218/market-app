@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/stock_transaction_log.dart';
-import 'package:supermarket_management/module/report/action/report_action.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/model/entity/stock_transaction_log.dart';
+import 'package:MarketEase/module/report/action/report_action.dart';
 
 class InventoryReportPage extends StatefulWidget {
   const InventoryReportPage({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:supermarket_management/model/entity/group.dart';
-import 'package:supermarket_management/module/managerial/action/employee.action.dart';
-import 'package:supermarket_management/module/managerial/action/group.action.dart';
+import 'package:MarketEase/model/entity/group.dart';
+import 'package:MarketEase/module/managerial/action/employee.action.dart';
+import 'package:MarketEase/module/managerial/action/group.action.dart';
 
 class CreateEmployeePage extends StatefulWidget {
   const CreateEmployeePage({super.key});

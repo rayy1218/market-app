@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/api/general_response.dart';
-import 'package:supermarket_management/api/service/checkout_service.dart';
-import 'package:supermarket_management/main.dart';
-import 'package:supermarket_management/module/auth/ui/login_page.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/api/general_response.dart';
+import 'package:MarketEase/api/service/checkout_service.dart';
+import 'package:MarketEase/main.dart';
+import 'package:MarketEase/module/auth/ui/login_page.dart';
 
 class CheckoutAction {
   late String token;

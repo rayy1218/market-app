@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supermarket_management/api/general_response.dart';
-import 'package:supermarket_management/api/service/reporting_service.dart';
-import 'package:supermarket_management/main.dart';
-import 'package:supermarket_management/module/auth/ui/login_page.dart';
+import 'package:MarketEase/api/general_response.dart';
+import 'package:MarketEase/api/service/reporting_service.dart';
+import 'package:MarketEase/main.dart';
+import 'package:MarketEase/module/auth/ui/login_page.dart';
 
 class ReportAction {
   late String token;
@@ -53,6 +53,21 @@ class ReportAction {
 
   Future fetchStockFlowLog() async {
     return ReportingService.of(token).fetchStockFlowLog().then((response) {
+      switch (response.status) {
+        case ResponseStatus.success:
+          return response.data;
+
+        case ResponseStatus.rejected:
+          return response.data['message'];
+
+        case ResponseStatus.error:
+          return 'FAILED_SERVER';
+      }
+    });
+  }
+
+  Future fetchFinanceReport() async {
+    return ReportingService.of(token).fetchFinanceReport().then((response) {
       switch (response.status) {
         case ResponseStatus.success:
           return response.data;

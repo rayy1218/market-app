@@ -1,7 +1,7 @@
-import 'package:supermarket_management/model/entity/address.dart';
-import 'package:supermarket_management/model/entity/item_source.dart';
-import 'package:supermarket_management/model/entity/order.dart';
-import 'package:supermarket_management/model/model.dart';
+import 'package:MarketEase/model/entity/address.dart';
+import 'package:MarketEase/model/entity/item_source.dart';
+import 'package:MarketEase/model/entity/order.dart';
+import 'package:MarketEase/model/model.dart';
 
 class Supplier extends Model {
   Address? address;

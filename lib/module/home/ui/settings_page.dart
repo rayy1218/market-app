@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supermarket_management/main.dart';
+import 'package:MarketEase/main.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});

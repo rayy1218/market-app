@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:supermarket_management/api/error_response.dart';
-import 'package:supermarket_management/model/entity/customer.dart';
-import 'package:supermarket_management/module/customer/action/customer.action.dart';
+import 'package:MarketEase/api/error_response.dart';
+import 'package:MarketEase/model/entity/customer.dart';
+import 'package:MarketEase/module/customer/action/customer.action.dart';
 
 class CustomerDetailPage extends StatefulWidget {
   final int customerId;
