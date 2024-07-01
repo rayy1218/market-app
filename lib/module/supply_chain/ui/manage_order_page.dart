@@ -1,3 +1,4 @@
+import 'package:MarketEase/module/supply_chain/ui/create_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:MarketEase/api/error_response.dart';
 import 'package:intl/intl.dart';
@@ -42,13 +43,29 @@ class _ManageOrderPageState extends State<ManageOrderPage> {
 
   @override
   Widget build(BuildContext context) {
-    return entries != null ? ListView(
-      children: entries!.map((e) => ListTile(
-        title: Text('${e.supplier.data!.name} at ${DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(e.timestamp)}'),
-        subtitle: Text(e.status.label),
-        onTap: () {
+    return entries != null ? Scaffold(
+      body: ListView(
+        children: entries!.map((e) => ListTile(
+          title: Text('${e.supplier.data!.name} at ${DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(e.timestamp)}'),
+          subtitle: Text(e.status.label),
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => OrderDetailPage(id: e.id!))
+            ).then((_) {
+              setState(() {
+                entries = null;
+              });
+
+              fetch();
+            });
+          },
+        )).toList(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => OrderDetailPage(id: e.id!))
+              MaterialPageRoute(builder: (context) => const CreateOrderPage())
           ).then((_) {
             setState(() {
               entries = null;
@@ -57,7 +74,7 @@ class _ManageOrderPageState extends State<ManageOrderPage> {
             fetch();
           });
         },
-      )).toList(),
+      ),
     ) : const Center(child: CircularProgressIndicator());
   }
 }

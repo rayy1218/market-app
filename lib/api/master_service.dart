@@ -106,7 +106,7 @@ class MasterService {
     );
 
     dio.options.baseUrl = kDebugMode
-        ? 'http://localhost/api'
+        ? 'https://market-74s4lexw6q-as.a.run.app/api'
         : 'https://market-74s4lexw6q-as.a.run.app/api';
 
     if (token != null) {

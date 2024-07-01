@@ -1,3 +1,4 @@
+import 'package:MarketEase/module/supply_chain/ui/create_supplier_page.dart';
 import 'package:flutter/material.dart';
 import 'package:MarketEase/api/error_response.dart';
 import 'package:MarketEase/model/entity/supplier.dart';
@@ -41,16 +42,32 @@ class _ManageSupplierPageState extends State<ManageSupplierPage> {
 
   @override
   Widget build(BuildContext context) {
-    return entries != null ? ListView(
-      children: entries!.map((e) => ListTile(
-        leading: const CircleAvatar(
-          backgroundColor: Colors.grey,
-          child: Icon(Icons.person),
-        ),
-        title: Text(e.name),
-        onTap: () {
+    return entries != null ? Scaffold(
+      body: ListView(
+        children: entries!.map((e) => ListTile(
+          leading: const CircleAvatar(
+            backgroundColor: Colors.grey,
+            child: Icon(Icons.person),
+          ),
+          title: Text(e.name),
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => SupplierDetailPage(id: e.id!))
+            ).then((_) {
+              setState(() {
+                entries = null;
+              });
+
+              fetch();
+            });
+          },
+        )).toList(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => SupplierDetailPage(id: e.id!))
+              MaterialPageRoute(builder: (context) => const CreateSupplierPage())
           ).then((_) {
             setState(() {
               entries = null;
@@ -59,7 +76,7 @@ class _ManageSupplierPageState extends State<ManageSupplierPage> {
             fetch();
           });
         },
-      )).toList(),
+      ),
     ) : const Center(child: CircularProgressIndicator());
   }
 }

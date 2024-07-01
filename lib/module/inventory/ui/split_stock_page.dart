@@ -1,3 +1,4 @@
+import 'package:MarketEase/module/inventory/ui/scan_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:MarketEase/api/error_response.dart';
@@ -118,7 +119,32 @@ class _SplitStockPageState extends State<SplitStockPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: IconButton(onPressed: () {}, icon: const Icon(Icons.barcode_reader)),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => ScanPage(
+                                  onScanClick: (barcode) {
+                                    if (barcode?.rawValue?.toString() != null) {
+                                      int result = itemStockDataOnLocation!.lastIndexWhere((element) {
+                                        return element.itemMeta.data!.universalProductCode == barcode?.rawValue?.toString();
+                                      });
+
+                                      if (result == -1) return false;
+
+                                      setState(() {
+                                        _formKey.currentState!.value['item_stock_data'] = result;
+                                      });
+
+                                      return true;
+                                    }
+
+                                    return false;
+                                  }
+                              ))
+                          );
+                        },
+                        icon: const Icon(Icons.barcode_reader)
+                    ),
                   ),
                 ],
               ),
@@ -163,7 +189,29 @@ class _SplitStockPageState extends State<SplitStockPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: IconButton(
                       icon: const Icon(Icons.barcode_reader),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => ScanPage(
+                              onScanClick: (barcode) {
+                                if (barcode?.rawValue?.toString() != null) {
+                                  int result = items!.lastIndexWhere((element) {
+                                    return element.universalProductCode == barcode?.rawValue?.toString();
+                                  });
+
+                                  if (result == -1) return false;
+
+                                  setState(() {
+                                    _formKey.currentState!.value['output_item'] = result;
+                                  });
+
+                                  return true;
+                                }
+
+                                return false;
+                              }
+                          ))
+                        );
+                      },
                     ),
                   )
                 ],

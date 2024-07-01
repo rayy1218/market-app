@@ -1,3 +1,4 @@
+import 'package:MarketEase/module/inventory/ui/scan_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:MarketEase/api/error_response.dart';
@@ -102,7 +103,32 @@ class _StockTransferPageState extends State<StockTransferPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: IconButton(onPressed: () {}, icon: const Icon(Icons.qr_code)),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => ScanPage(
+                                  onScanClick: (barcode) {
+                                    if (barcode?.rawValue?.toString() != null) {
+                                      int result = itemStockDataOnLocation!.lastIndexWhere((element) {
+                                        return element.itemMeta.data!.universalProductCode == barcode?.rawValue?.toString();
+                                      });
+
+                                      if (result == -1) return false;
+
+                                      setState(() {
+                                        _formKey.currentState!.value['item_stock_data'] = result;
+                                      });
+
+                                      return true;
+                                    }
+
+                                    return false;
+                                  }
+                              ))
+                          );
+                        },
+                        icon: const Icon(Icons.qr_code)
+                    ),
                   ),
                 ],
               ),

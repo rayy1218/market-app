@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:MarketEase/module/supply_chain/ui/create_order_page.dart';
-import 'package:MarketEase/module/supply_chain/ui/create_supplier_page.dart';
 import 'package:MarketEase/module/supply_chain/ui/manage_order_page.dart';
 import 'package:MarketEase/module/supply_chain/ui/manage_supplier_page.dart';
-
-
 
 class SupplyChainPage extends StatefulWidget {
   const SupplyChainPage({super.key});
@@ -44,30 +39,6 @@ class _SupplyChainPageState extends State<SupplyChainPage> {
               icon: Icon(Icons.groups),
               label: 'Supplier'
           ),
-        ],
-      ),
-      floatingActionButton: SpeedDial(
-        icon: Icons.add,
-        spacing: 8,
-        children: [
-          SpeedDialChild(
-            label: 'Create Order',
-            child: const Icon(Icons.local_shipping),
-            onTap: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const CreateOrderPage())
-              );
-            }
-          ),
-          SpeedDialChild(
-            label: 'Add Supplier',
-            child: const Icon(Icons.people),
-            onTap: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const CreateSupplierPage())
-              );
-            }
-          )
         ],
       ),
     );

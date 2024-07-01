@@ -1,3 +1,4 @@
+import 'package:MarketEase/module/inventory/ui/scan_page.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -94,7 +95,29 @@ class _CreateSourcePageState extends State<CreateSourcePage> {
                       padding: const EdgeInsets.all(8.0),
                       child: IconButton(
                         icon: const Icon(Icons.barcode_reader),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => ScanPage(
+                                  onScanClick: (barcode) {
+                                    if (barcode?.rawValue?.toString() != null) {
+                                      int result = items!.lastIndexWhere((element) {
+                                        return element.universalProductCode == barcode?.rawValue?.toString();
+                                      });
+
+                                      if (result == -1) return false;
+
+                                      setState(() {
+                                        _formKey.currentState!.value['product'] = result;
+                                      });
+
+                                      return true;
+                                    }
+
+                                    return false;
+                                  }
+                              ))
+                          );
+                        },
                       ),
                     )
                   ],
