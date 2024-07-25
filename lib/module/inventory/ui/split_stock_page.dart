@@ -1,5 +1,6 @@
 import 'package:MarketEase/module/inventory/ui/scan_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:MarketEase/api/error_response.dart';
 import 'package:MarketEase/model/entity/item_meta.dart';
@@ -74,6 +75,13 @@ class _SplitStockPageState extends State<SplitStockPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
               child: FormBuilderDropdown(
+                validator: (value) {
+                  if (value == null) {
+                    return 'Required';
+                  }
+
+                  return null;
+                },
                 decoration: const InputDecoration(
                   labelText: 'Location of splitting item',
                   border: OutlineInputBorder(),
@@ -109,6 +117,14 @@ class _SplitStockPageState extends State<SplitStockPage> {
                 children: [
                   Flexible(
                     child: FormBuilderDropdown(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Required';
+                        }
+
+                        return null;
+                      },
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Item to split',
@@ -132,7 +148,7 @@ class _SplitStockPageState extends State<SplitStockPage> {
                                       if (result == -1) return false;
 
                                       setState(() {
-                                        _formKey.currentState!.value['item_stock_data'] = result;
+                                        _formKey.currentState?.fields['item_stock_data']?.didChange(result);
                                       });
 
                                       return true;
@@ -152,6 +168,18 @@ class _SplitStockPageState extends State<SplitStockPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
               child: FormBuilderTextField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Required';
+                  }
+
+                  return null;
+                },
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
                 decoration: const InputDecoration(
                   labelText: 'Quantity to split',
                   border: OutlineInputBorder(),
@@ -163,6 +191,14 @@ class _SplitStockPageState extends State<SplitStockPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 16.0),
               child: FormBuilderDropdown(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value == null) {
+                    return 'Required';
+                  }
+
+                  return null;
+                },
                 decoration: const InputDecoration(
                   labelText: 'Location',
                   border: OutlineInputBorder(),
@@ -177,6 +213,14 @@ class _SplitStockPageState extends State<SplitStockPage> {
                 children: [
                   Expanded(
                     child: FormBuilderDropdown(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Required';
+                        }
+
+                        return null;
+                      },
                       items: items == null ? [] : items!.map((e) => DropdownMenuItem(value: e.id, child: Text(e.name))).toList(),
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -201,7 +245,7 @@ class _SplitStockPageState extends State<SplitStockPage> {
                                   if (result == -1) return false;
 
                                   setState(() {
-                                    _formKey.currentState!.value['output_item'] = result;
+                                    _formKey.currentState?.fields['output_item']?.didChange(result);
                                   });
 
                                   return true;
@@ -220,6 +264,18 @@ class _SplitStockPageState extends State<SplitStockPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
               child: FormBuilderTextField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Required';
+                  }
+
+                  return null;
+                },
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
                 decoration: const InputDecoration(
                   labelText: 'Quantity for each item split',
                   border: OutlineInputBorder(),
@@ -239,6 +295,7 @@ class _SplitStockPageState extends State<SplitStockPage> {
         ),
         TextButton(
             onPressed: () {
+              if (!_formKey.currentState!.validate()) return;
               _formKey.currentState?.save();
 
               final itemStockData = _formKey.currentState?.value['item_stock_data'];

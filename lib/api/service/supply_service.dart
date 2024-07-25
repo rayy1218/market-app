@@ -123,4 +123,9 @@ class SupplyService {
       }
     ).then((response) => GeneralResponse(response));
   }
+
+  Future<GeneralResponse> orderStockIn({id}) async {
+    return await dio.post('/supply/order/stock-in/$id')
+        .then((response) => GeneralResponse(response));
+  }
 }

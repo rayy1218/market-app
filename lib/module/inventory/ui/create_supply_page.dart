@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:MarketEase/api/error_response.dart';
 import 'package:MarketEase/model/entity/item_meta.dart';
@@ -42,6 +43,10 @@ class _CreateSupplyPageState extends State<CreateSupplyPage> {
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
                 FormBuilderTextField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Default Restock Quantity'
@@ -50,6 +55,10 @@ class _CreateSupplyPageState extends State<CreateSupplyPage> {
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
                 FormBuilderTextField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Restock Point'
@@ -69,6 +78,7 @@ class _CreateSupplyPageState extends State<CreateSupplyPage> {
         ),
         TextButton(
             onPressed: () {
+              if (!_formKey.currentState!.validate()) return;
               _formKey.currentState?.save();
 
               final String onLowStockAction = _formKey.currentState?.value['onLowStockAction'];

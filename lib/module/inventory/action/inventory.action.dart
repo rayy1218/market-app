@@ -83,8 +83,8 @@ class InventoryAction {
     });
   }
 
-  Future createItem({name, upc, sku, brand, category, price}) async {
-    return InventoryService.of(token).createItem(name: name, upc: upc, sku: sku, brand: brand, category: category, price: price).then((response) {
+  Future createItem({name, upc, sku, brand, category, price, receive, stockout}) async {
+    return InventoryService.of(token).createItem(name: name, upc: upc, sku: sku, brand: brand, category: category, price: price, receive: receive, stockout: stockout).then((response) {
       switch (response.status) {
         case ResponseStatus.success:
           return response.data;

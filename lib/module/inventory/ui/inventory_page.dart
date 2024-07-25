@@ -118,7 +118,7 @@ class _InventoryPanelState extends State<InventoryPanel> {
           contentPadding: EdgeInsets.fromLTRB(16.0 + 16.0 * layer, 0, 0, 0),
           title: Text(entity.name),
         ),
-        ...entity.stocks!.map((stock) => ListTile(
+        ...(entity.stocks ?? []).map((stock) => ListTile(
           contentPadding: EdgeInsets.fromLTRB(16.0 + 16.0 * layer, 0, 16, 0),
           leading: const CircleAvatar(
             backgroundColor: Colors.grey,

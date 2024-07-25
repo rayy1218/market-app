@@ -1,5 +1,6 @@
 import 'package:MarketEase/module/inventory/ui/scan_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:MarketEase/api/error_response.dart';
 import 'package:MarketEase/model/entity/item_stock_data.dart';
@@ -58,6 +59,13 @@ class _StockTransferPageState extends State<StockTransferPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
               child: FormBuilderDropdown(
+                validator: (value) {
+                  if (value == null) {
+                    return 'Required';
+                  }
+
+                  return null;
+                },
                 decoration: const InputDecoration(
                   labelText: 'Location to transfer from',
                   border: OutlineInputBorder(),
@@ -93,6 +101,13 @@ class _StockTransferPageState extends State<StockTransferPage> {
                 children: [
                   Flexible(
                     child: FormBuilderDropdown(
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Required';
+                        }
+
+                        return null;
+                      },
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Item to transfer',
@@ -116,7 +131,7 @@ class _StockTransferPageState extends State<StockTransferPage> {
                                       if (result == -1) return false;
 
                                       setState(() {
-                                        _formKey.currentState!.value['item_stock_data'] = result;
+                                        _formKey.currentState?.fields['item_stock_data']?.didChange(result);
                                       });
 
                                       return true;
@@ -137,6 +152,13 @@ class _StockTransferPageState extends State<StockTransferPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 16.0),
               child: FormBuilderDropdown(
+                validator: (value) {
+                  if (value == null) {
+                    return 'Required';
+                  }
+
+                  return null;
+                },
                 decoration: const InputDecoration(
                   labelText: 'Location',
                   border: OutlineInputBorder(),
@@ -148,6 +170,10 @@ class _StockTransferPageState extends State<StockTransferPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
               child: FormBuilderTextField(
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
                 decoration: const InputDecoration(
                   labelText: 'Quantity',
                   border: OutlineInputBorder(),
@@ -167,6 +193,7 @@ class _StockTransferPageState extends State<StockTransferPage> {
         ),
         TextButton(
           onPressed: () async {
+            if (!_formKey.currentState!.validate()) return;
             _formKey.currentState?.save();
 
             final itemStockData = _formKey.currentState?.value['item_stock_data'];

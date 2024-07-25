@@ -5,6 +5,7 @@ import 'package:MarketEase/model/entity/company.dart';
 import 'package:MarketEase/model/entity/item_source.dart';
 import 'package:MarketEase/model/entity/item_stock_data.dart';
 import 'package:MarketEase/model/entity/item_supply_data.dart';
+import 'package:MarketEase/model/entity/stock_location.dart';
 import 'package:MarketEase/model/model.dart';
 import 'package:MarketEase/model/model_or_id.dart';
 
@@ -22,6 +23,7 @@ class ItemMeta extends Model {
   ItemSaleData? saleData;
   double? capital;
   int? quantity;
+  ModelOrId<StockLocation>? receive;
 
   ItemMeta({
     required this.company, required this.name, required this.stockKeepingUnit,
@@ -34,8 +36,8 @@ class ItemMeta extends Model {
       name = data['name'],
       stockKeepingUnit = data['stock_keeping_unit'],
       universalProductCode = data['universal_product_code'],
-      brand = data['brand'] is int ? ModelOrId.id(id: data['brand']) : ModelOrId.data(data: Brand.fromMap(data['brand'])),
-      category = data['category'] is int ? ModelOrId.id(id: data['category']) : ModelOrId.data(data: Category.fromMap(data['category'])),
+      brand = data['brand'] == null ? null : data['brand'] is int ? ModelOrId.id(id: data['brand']) : ModelOrId.data(data: Brand.fromMap(data['brand'])),
+      category =  data['brand'] == null ? null : data['category'] is int ? ModelOrId.id(id: data['category']) : ModelOrId.data(data: Category.fromMap(data['category'])),
       stockNumber = data['stock_count'],
       stocks = data['stocks'] == null
           ? null
@@ -51,5 +53,10 @@ class ItemMeta extends Model {
           : ItemSaleData.fromMap(data['sale_data']),
       capital = data['capital'] == null ? null : double.parse(data['capital'].toString()),
       quantity = data['quantity'],
+      receive = data['default_receive_location'] == null
+          ? null
+          : data['default_receive_location'] is int
+            ? ModelOrId.id(id: data['default_receive_location'])
+            : ModelOrId.data(data: StockLocation.fromMap(data['default_receive_location'])),
       super(id: data['id']);
 }

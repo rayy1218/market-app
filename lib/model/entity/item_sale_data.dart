@@ -17,7 +17,7 @@ class ItemSaleData extends Model {
   ModelOrId<ItemMeta> itemMeta;
   double price;
   DateTime startedAt;
-  ModelOrId<StockLocation> defaultStockOutLocation;
+  ModelOrId<StockLocation>? defaultStockOutLocation;
   List<CheckoutItem>? checkoutItems;
 
   ItemSaleData.fromMap(Map<String, dynamic> data):
@@ -27,7 +27,7 @@ class ItemSaleData extends Model {
       price = double.parse(data['price'].toString()),
       startedAt = DateTime.parse(data['started_at']),
       defaultStockOutLocation = data['default_stock_out_location'] == null
-          ? ModelOrId.id(id: data['default_stock_out_location_id'])
+          ? data['default_stock_out_location_id'] == null ? null : ModelOrId.id(id: data['default_stock_out_location_id'])
           : ModelOrId.data(data: StockLocation.fromMap(data['default_stock_out_location'])),
       checkoutItems = data['checkout_items'] == null
           ? null

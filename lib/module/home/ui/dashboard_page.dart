@@ -31,7 +31,7 @@ class _DashboardPageState extends State<DashboardPage> {
         children: const [
           ShiftCard(),
           ProductLowStockCard(),
-          LocationStockCards(),
+          // LocationStockCards(),
           DeliveringOrderCard(),
         ],
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:MarketEase/module/report/ui/inventory_report_page.dart';
 import 'package:MarketEase/module/report/ui/sale_report_page.dart';
-import 'package:MarketEase/module/report/ui/shift_report_page.dart';
 import 'package:MarketEase/module/report/ui/supply_chain_report.dart';
 
 class ReportPage extends StatefulWidget {
@@ -57,24 +56,6 @@ class _ReportPageState extends State<ReportPage> {
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const InventoryReportPage())
-                  );
-                },
-              ),
-              ListTile(
-                leading: Ink(
-                  decoration: const ShapeDecoration(
-                    color: Colors.blue,
-                    shape: CircleBorder(),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(Icons.calendar_month, color: Colors.white),
-                  ),
-                ),
-                title: const Text('Shift and Schedule Report'),
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const ShiftReportPage())
                   );
                 },
               ),

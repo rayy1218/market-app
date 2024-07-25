@@ -86,9 +86,13 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
       backgroundColor: Colors.black,
       body: GestureDetector(
         onTap: () {
+          print('test');
           bool result = widget.onScanClick(_barcode);
 
           if (result) {
+            ScaffoldMessenger.of(context)..clearSnackBars()..showSnackBar(
+                const SnackBar(content: Text('Barcode found'))
+            );
             Navigator.of(context).pop();
           }
           else {

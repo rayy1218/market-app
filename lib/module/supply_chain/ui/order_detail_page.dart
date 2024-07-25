@@ -60,7 +60,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         final formKey = GlobalKey<FormBuilderState>();
 
         return AlertDialog(
-          title: const Text('Confirm Delete'),
+          title: const Text('Change Status'),
           content: FormBuilder(
             key: formKey,
             child: Column(
@@ -121,6 +121,42 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         entry!.updatedTimestamp = DateTime.parse(response['timestamp']);
       });
     });
+  }
+
+  void onStockInPress() {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Stock In from Order'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No', style: TextStyle(color: Colors.redAccent)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () async {
+                await SupplyAction.of(context).orderStockIn(id: widget.id).then((response) {
+                  if (response is ErrorResponse) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(response.message))
+                    );
+
+                    return;
+                  }
+
+                  Navigator.of(context).pop();
+                });
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -197,7 +233,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                     ) : IconButton(
                       icon: const Icon(Icons.inventory),
                       onPressed: () async {
-                        onStatusEditClick();
+                        onStockInPress();
                       },
                     ),
                   ),
@@ -223,7 +259,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   ),
                   const Divider(indent: 8, endIndent: 8),
                   ...entry!.orderItems!.map((e) => ListTile(
-                    title: Text('${e.itemSource.data!.itemMeta.data!.name} (${e.itemSource.data!.itemMeta.data!.brand!.data!.name})'),
+                    title: Text('${e.itemSource.data!.itemMeta.data!.name} ${e.itemSource.data!.itemMeta.data!.brand != null ? "(${e.itemSource.data!.itemMeta.data!.brand?.data!.name})" : ""}'),
                     subtitle: Text('${Helper.getCurrencyString(e.itemSource.data!.unitPrice)} per unit'),
                     trailing: Text('${e.quantity} unit(s)'),
                   )),

@@ -1,3 +1,4 @@
+import 'package:MarketEase/main.dart';
 import 'package:flutter/material.dart';
 import 'package:MarketEase/module/checkout/ui/checkout_page.dart';
 import 'package:MarketEase/module/customer/ui/customer_page.dart';
@@ -5,6 +6,7 @@ import 'package:MarketEase/module/inventory/ui/inventory_page.dart';
 import 'package:MarketEase/module/managerial/ui/managerial_page.dart';
 import 'package:MarketEase/module/shift/ui/shift_page.dart';
 import 'package:MarketEase/module/supply_chain/ui/supply_chain_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OperationPage extends StatefulWidget {
   const OperationPage({super.key});
@@ -14,6 +16,28 @@ class OperationPage extends StatefulWidget {
 }
 
 class _OperationPageState extends State<OperationPage> {
+  Map? enable;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final bloc = BlocProvider.of<AuthenticationBloc>(context);
+
+      setState(() {
+        enable = {
+          'managerial': (bloc.state as LogonState).accessRights!.any((element) => element.name == 'managerial setting'),
+          'shift': (bloc.state as LogonState).accessRights!.any((element) => element.name == 'shift edit'),
+          'supply': (bloc.state as LogonState).accessRights!.any((element) => element.name == 'supply supplier view'),
+          'inventory': (bloc.state as LogonState).accessRights!.any((element) => element.name == 'inventory view'),
+          'customer': (bloc.state as LogonState).accessRights!.any((element) => element.name == 'sales customer view'),
+          'checkout': (bloc.state as LogonState).accessRights!.any((element) => element.name == 'sales checkout')
+        };
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,13 +46,13 @@ class _OperationPageState extends State<OperationPage> {
         title: const Text('Operations'),
         automaticallyImplyLeading: false,
       ),
-      body: GridView.count(
+      body: enable != null ? GridView.count(
         padding: const EdgeInsets.all(16.0),
         mainAxisSpacing: 4,
         crossAxisSpacing: 4,
         crossAxisCount: 2,
         children: [
-          GestureDetector(
+          if (enable!['managerial']) GestureDetector(
             onTap: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const ManagerialPage())
@@ -44,7 +68,7 @@ class _OperationPageState extends State<OperationPage> {
               ),
             ),
           ),
-          GestureDetector(
+          if (enable!['shift']) GestureDetector(
             onTap: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const ShiftPage())
@@ -63,7 +87,7 @@ class _OperationPageState extends State<OperationPage> {
               ),
             ),
           ),
-          GestureDetector(
+          if (enable!['supply']) GestureDetector(
             onTap: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const SupplyChainPage())
@@ -79,7 +103,7 @@ class _OperationPageState extends State<OperationPage> {
               ),
             ),
           ),
-          GestureDetector(
+          if (enable!['inventory']) GestureDetector(
             onTap: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const InventoryPage())
@@ -95,7 +119,7 @@ class _OperationPageState extends State<OperationPage> {
               ),
             ),
           ),
-          GestureDetector(
+          if (enable!['customer']) GestureDetector(
             onTap: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const CustomerPage())
@@ -111,7 +135,7 @@ class _OperationPageState extends State<OperationPage> {
               ),
             ),
           ),
-          GestureDetector(
+          if (enable!['checkout']) GestureDetector(
             onTap: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const CheckoutPage())
@@ -128,7 +152,7 @@ class _OperationPageState extends State<OperationPage> {
             ),
           ),
         ],
-      ),
+      ) : const Center(child: CircularProgressIndicator()),
     );
   }
 }

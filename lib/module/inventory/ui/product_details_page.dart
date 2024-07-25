@@ -368,13 +368,25 @@ class _ItemDetailFormState extends State<ItemDetailForm> {
                 name: 'unit_price'
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+              child: FormBuilderDropdown(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Default Receive Location',
+                ),
+                name: 'stock_receive_location',
+                initialValue: widget.itemMeta.receive,
+                items: widget.locationDropdown.map((e) => DropdownMenuItem(value: e.id, child: Text(e.name))).toList(),
+              ),
+            ),
             FormBuilderDropdown(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Default Stock Out Location',
               ),
               name: 'stock_out_location',
-              initialValue: widget.itemMeta.saleData!.defaultStockOutLocation.id,
+              initialValue: widget.itemMeta.saleData!.defaultStockOutLocation?.id,
               items: widget.locationDropdown.map((e) => DropdownMenuItem(value: e.id, child: Text(e.name))).toList(),
             ),
           ],
@@ -432,14 +444,16 @@ class _ItemSalesPanelState extends State<ItemSalesPanel> {
                   child: Icon(Icons.inventory),
                 ),
                 Container(width: 24),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Name: ${widget.itemMeta.name}'),
-                    Text('Selling Price: ${Helper.getCurrencyString(widget.itemMeta.saleData!.price)}'),
-                    Text('Stock Out Location: ${widget.itemMeta.saleData!.defaultStockOutLocation.data!.name}'),
-                  ],
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Name: ${widget.itemMeta.name}'),
+                      Text('Selling Price: ${Helper.getCurrencyString(widget.itemMeta.saleData!.price)}'),
+                      Text('Stock Out Location: ${widget.itemMeta.saleData!.defaultStockOutLocation?.data!.name ?? '-'}'),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -486,14 +500,16 @@ class _ItemStockPanelState extends State<ItemStockPanel> {
                   child: Icon(Icons.inventory),
                 ),
                 Container(width: 24),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Name: ${widget.itemMeta.name}'),
-                    Text("Category: ${widget.itemMeta.category?.data?.name ?? '-'}"),
-                    Text("Brand/Origin: ${widget.itemMeta.brand?.data?.name ?? '-'}"),
-                  ],
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Name: ${widget.itemMeta.name}'),
+                      Text("Category: ${widget.itemMeta.category?.data?.name ?? '-'}"),
+                      Text("Brand/Origin: ${widget.itemMeta.brand?.data?.name ?? '-'}"),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -572,12 +588,14 @@ class _ItemSupplyPanelState extends State<ItemSupplyPanel> {
                   child: Icon(Icons.inventory),
                 ),
                 Container(width: 24),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Name: ${widget.itemMeta.name}'),
-                  ],
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Name: ${widget.itemMeta.name}'),
+                    ],
+                  ),
                 ),
               ],
             ),

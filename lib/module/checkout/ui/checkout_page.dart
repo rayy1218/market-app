@@ -165,7 +165,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 ListView(
                   children: [
                     ...items.map((e) => ListTile(
-                      title: Text('${e.item.name} (${e.item.brand!.data!.name})'),
+                      title: Text('${e.item.name} ${e.item.brand != null ? "(${e.item.brand!.data!.name})" : ""}'),
                       subtitle: Text('\$${e.item.saleData!.price.toStringAsFixed(2)} per unit'),
                       trailing: Text('${e.quantity} unit(s)'),
                     )),
@@ -227,7 +227,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     const Divider(indent: 8, endIndent: 8),
                     ...items.map((e) => ListTile(
-                      title: Text('${e.item.name} (${e.item.brand!.data!.name})'),
+                      title: Text('${e.item.name} ${e.item.brand != null ? "(${e.item.brand!.data!.name})" : ""}'),
                       subtitle: Text('\$${e.item.saleData!.price.toStringAsFixed(2)} per unit'),
                       trailing: Text('${e.quantity} unit(s)'),
                     )),

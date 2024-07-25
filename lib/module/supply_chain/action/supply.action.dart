@@ -191,4 +191,19 @@ class SupplyAction {
       }
     });
   }
+
+  Future orderStockIn({id}) async {
+    return SupplyService.of(token).orderStockIn(id: id).then((response) {
+      switch (response.status) {
+        case ResponseStatus.success:
+          return response.data;
+
+        case ResponseStatus.rejected:
+          return ErrorResponse(message: response.data['message']);
+
+        case ResponseStatus.error:
+          return ErrorResponse(message: 'FAILED_SERVER');
+      }
+    });
+  }
 }

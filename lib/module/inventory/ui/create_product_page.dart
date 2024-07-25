@@ -1,3 +1,4 @@
+import 'package:MarketEase/model/entity/stock_location.dart';
 import 'package:MarketEase/module/inventory/ui/scan_page.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class _CreateProductPageState extends State<CreateProductPage> {
 
   List<Brand>? brandDropdown;
   List<Category>? categoryDropdown;
+  List<StockLocation>? stockLocationDropdown;
 
   void fetch() async {
     InventoryAction.of(context).fetchBrandDropdown().then((response) {
@@ -49,6 +51,20 @@ class _CreateProductPageState extends State<CreateProductPage> {
 
       setState(() {
         categoryDropdown = (response['data'] as List).map((item) => Category.fromMap(item)).toList();
+      });
+    });
+
+    InventoryAction.of(context).fetchLocations().then((response) {
+      if (response is ErrorResponse) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(response.message))
+        );
+
+        return;
+      }
+
+      setState(() {
+        stockLocationDropdown = (response['data'] as List).map((item) => StockLocation.fromMap(item)).toList();
       });
     });
   }
@@ -196,6 +212,13 @@ class _CreateProductPageState extends State<CreateProductPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
               child: FormBuilderTextField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Required';
+                    }
+
+                    return null;
+                  },
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Item Name'
@@ -206,6 +229,13 @@ class _CreateProductPageState extends State<CreateProductPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
               child: FormBuilderTextField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Required';
+                    }
+
+                    return null;
+                  },
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Stock Keeping Unit'
@@ -219,6 +249,13 @@ class _CreateProductPageState extends State<CreateProductPage> {
                 children: [
                   Expanded(
                     child: FormBuilderTextField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Required';
+                          }
+
+                          return null;
+                        },
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Universal Product Code'
@@ -237,7 +274,7 @@ class _CreateProductPageState extends State<CreateProductPage> {
                                 onScanClick: (barcode) {
                                   if (barcode?.rawValue?.toString() != null) {
                                     setState(() {
-                                      _formKey.currentState?.value['upc'] = barcode?.rawValue?.toString();
+                                      _formKey.currentState?.fields['upc']?.didChange(barcode?.rawValue?.toString());
                                     });
 
                                     return true;
@@ -310,6 +347,13 @@ class _CreateProductPageState extends State<CreateProductPage> {
               child: Text('Item Sales Information'),
             ),
             FormBuilderTextField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Required';
+                  }
+
+                  return null;
+                },
               inputFormatters: [CurrencyTextInputFormatter.currency(symbol: '\$')],
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -317,6 +361,36 @@ class _CreateProductPageState extends State<CreateProductPage> {
               ),
               keyboardType: TextInputType.number,
               name: 'price'
+            ),
+            const Divider(),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+              child: Text('Item Stock Flow'),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+              child: FormBuilderDropdown(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Default Receive Location',
+                  ),
+                  items: stockLocationDropdown != null ? [
+                    const DropdownMenuItem(value: null, child: Text('None')),
+                    ...stockLocationDropdown!.map((e) => DropdownMenuItem(value: e.id, child: Text(e.name))).toList(),
+                  ] : [],
+                  name: 'default_receive_location'
+              ),
+            ),
+            FormBuilderDropdown(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Default Stock Out Location',
+                ),
+                items: stockLocationDropdown != null ? [
+                  const DropdownMenuItem(value: null, child: Text('None')),
+                  ...stockLocationDropdown!.map((e) => DropdownMenuItem(value: e.id, child: Text(e.name))).toList(),
+                ] : [],
+                name: 'default_stockout_location'
             ),
           ],
         )
@@ -330,6 +404,7 @@ class _CreateProductPageState extends State<CreateProductPage> {
         ),
         TextButton(
           onPressed: () {
+            if (!_formKey.currentState!.validate()) return;
             _formKey.currentState!.save();
 
             final name = _formKey.currentState?.value['name'];
@@ -338,9 +413,11 @@ class _CreateProductPageState extends State<CreateProductPage> {
             final brand = _formKey.currentState?.value['brand'];
             final category = _formKey.currentState?.value['category'];
             final price = double.parse(_formKey.currentState?.value['price'].split('\$')[1]);
+            final receiveLocation = _formKey.currentState?.value['default_receive_location'];
+            final stockOutLocation = _formKey.currentState?.value['default_stockout_location'];
 
             InventoryAction.of(context).createItem(
-                name: name, upc: upc, sku: sku, brand: brand, category: category, price: price
+                name: name, upc: upc, sku: sku, brand: brand, category: category, price: price, receive: receiveLocation, stockout: stockOutLocation,
             ).then((response) {
               if (response is ErrorResponse) {
                 ScaffoldMessenger.of(context).showSnackBar(

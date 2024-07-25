@@ -57,6 +57,14 @@ class _CreateLocationPageState extends State<CreateLocationPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
                   child: FormBuilderTextField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Required';
+                      }
+
+                      return null;
+                    },
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Stock Location Name'
@@ -89,6 +97,7 @@ class _CreateLocationPageState extends State<CreateLocationPage> {
         ),
         TextButton(
           onPressed: () {
+            if (!formKey.currentState!.validate()) return;
             formKey.currentState?.save();
 
             final String name = formKey.currentState?.value['name'];

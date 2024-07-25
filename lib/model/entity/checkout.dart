@@ -15,7 +15,7 @@ class Checkout extends Model {
     required this.referenceCode,
   });
 
-  ModelOrId<Customer> customer;
+  ModelOrId<Customer>? customer;
   ModelOrId<User> user;
   double amount;
   DateTime timestamp;
@@ -25,7 +25,7 @@ class Checkout extends Model {
   Checkout.fromMap(Map<String, dynamic> data):
       customer = data['customer'] != null
           ? ModelOrId.data(data: Customer.fromMap(data['customer']))
-          : ModelOrId.id(id: data['customer_id']),
+          : data['customer_id'] != null ? ModelOrId.id(id: data['customer_id']) : null,
       user = data['user'] != null
           ? ModelOrId.data(data: User.fromMap(data['user']))
           : ModelOrId.id(id: data['user_id']),

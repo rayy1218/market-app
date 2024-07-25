@@ -198,7 +198,7 @@ class StockTransactionLogCard extends StatelessWidget {
       case StockTransactionType.split:
         return Text('${log.stockOutItem!.name} x ${log.stockOutQuantity} split to ${log.stockInItem!.name} x ${log.stockInQuantity} at ${log.stockOutLocation!.name}\nAt ${DateFormat('MMM d, y HH:mm').format(log.createdAt)}\nBy ${log.user!.username}');
       case StockTransactionType.orderStockIn:
-        // TODO: Handle this case.
+        return Text('${log.stockInItem!.name} x ${log.stockInQuantity} to ${log.stockInLocation!.name}\nAt ${DateFormat('MMM d, y HH:mm').format(log.createdAt)}');
       case StockTransactionType.checkoutStockOut:
         return Text('${log.stockOutItem!.name} x ${log.stockOutQuantity} from ${log.stockOutLocation!.name}\n${log.checkoutItem!.checkout.data!.referenceCode}\nAt ${DateFormat('MMM d, y HH:mm').format(log.createdAt)}\nBy ${log.user!.username}');
     }

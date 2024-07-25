@@ -1,5 +1,6 @@
 import 'package:MarketEase/module/inventory/ui/scan_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:MarketEase/api/error_response.dart';
 import 'package:MarketEase/model/entity/item_meta.dart';
@@ -102,7 +103,7 @@ class _StockInPageState extends State<StockInPage> {
                                       if (result == -1) return false;
 
                                       setState(() {
-                                        _formKey.currentState!.value['product'] = result;
+                                        _formKey.currentState?.fields['product']?.didChange(result);
                                       });
 
                                       return true;
@@ -120,7 +121,11 @@ class _StockInPageState extends State<StockInPage> {
               ) : Container(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
-                child: FormBuilderTextField(
+                child: FormBuilderTextField(   
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Quantity'

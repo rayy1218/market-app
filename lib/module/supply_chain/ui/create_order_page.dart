@@ -196,6 +196,7 @@ class _ChooseSourcePageState extends State<ChooseSourcePage> {
                 border: OutlineInputBorder(),
                 labelText: 'Quantity'
             ),
+            keyboardType: TextInputType.number,
           ),
           actions: <Widget>[
             TextButton(

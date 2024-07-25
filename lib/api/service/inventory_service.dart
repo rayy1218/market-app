@@ -35,7 +35,7 @@ class InventoryService {
 
   }
 
-  Future<GeneralResponse> createItem({name, sku, upc, brand, category, price}) async {
+  Future<GeneralResponse> createItem({name, sku, upc, brand, category, price, receive, stockout}) async {
     return await dio.post('/inventory/item',
       data: {
         'name': name,
@@ -44,6 +44,8 @@ class InventoryService {
         'brand': brand,
         'category': category,
         'price': price,
+        'default_receive_location': receive,
+        'default_stock_out_location': stockout,
       }
     ).then((response) => GeneralResponse(response));
   }
